@@ -1,0 +1,29 @@
+[
+    {
+        "type": "album",
+        "title": "Clean",
+        "artist_id": "VFOEFPQVE4"
+    },
+    {
+        "type": "artist",
+        "name": "Lorde",
+        "id": "YWAOVFQMOE",
+        "albums": [
+            {
+                "title": "Pure Heroine"
+            }
+        ]
+    },
+    {
+        "type": "artist",
+        "name": "Erutan",
+        "albums": [
+            {
+                "title": "The Court of Leaves"
+            },
+            {
+                "title": "Nomitori No Uta"
+            }
+        ]
+    }
+]
