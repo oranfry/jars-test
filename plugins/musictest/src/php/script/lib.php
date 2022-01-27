@@ -2,7 +2,7 @@
 
 function check_album_artists($expected)
 {
-    global $album_ids, $artist_ids;
+    global $ids;
 
     info(__METHOD__);
 
@@ -14,7 +14,7 @@ function check_album_artists($expected)
     $collection = $jars->report('collection', 'all', $version);
 
     foreach ($collection as $album) {
-        $expected_artist_id = @$artist_ids[@$expected[$album->title]];
+        $expected_artist_id = @$ids['artist'][@$expected[$album->title]];
 
         if (!$expected_artist_id) {
             throw new TestFailedException('Could not determine expected artist id for album [' . $album->title . ']');
@@ -37,9 +37,23 @@ function check_album_artists($expected)
     $jars->filesystem()->revert();
 }
 
+function check_albums_and_artists(array $album_artists)
+{
+    $artists = array_unique(array_values($album_artists));
+    $albums = array_keys($album_artists);
+
+    check_artist_records($artists);
+    check_artist_reports($artists);
+
+    check_album_records($albums);
+    check_album_reports($albums);
+
+    check_album_artists($album_artists);
+}
+
 function check_album_records($expected)
 {
-    global $album_ids;
+    global $ids;
 
     info(__METHOD__);
 
@@ -79,8 +93,8 @@ function check_album_records($expected)
 
         logger('Album has a title');
 
-        if ($id !== @$album_ids[$record->title]) {
-            throw new TestFailedException('Unexpected Album ID: [' . $id . '], expected [' . @$album_ids[$record->title] . '] for album [' . $record->title . ']');
+        if ($id !== @$ids['album'][$record->title]) {
+            throw new TestFailedException('Unexpected Album ID: [' . $id . '], expected [' . @$ids['album'][$record->title] . '] for album [' . $record->title . ']');
         }
 
         if (false === $pos = array_search($record->title, $expected)) {
@@ -96,12 +110,12 @@ function check_album_records($expected)
         throw new TestFailedException('Expected album(s) not found: [' . print_r($expected, true) . ']');
     }
 
-    logger('Found all expected albums');
+    logger('Found all expected albums, and no unexpected ones');
 }
 
 function check_album_reports($expected)
 {
-    global $album_ids;
+    global $ids;
 
     info(__METHOD__);
 
@@ -142,18 +156,18 @@ function check_album_reports($expected)
 
         unset($expected[$pos]);
 
-        if ($album_ids[$album->title] !== $album->id) {
-            throw new TestFailedException('Unexpected id for album: [' . $album->title . ']: [' . $album->id . '], expected [' . $album_ids[$album->title] . ']');
+        if ($ids['album'][$album->title] !== $album->id) {
+            throw new TestFailedException('Unexpected id for album: [' . $album->title . ']: [' . $album->id . '], expected [' . $ids['album'][$album->title] . ']');
         }
 
-        logger('Album ID was [' . $album_ids[$album->title] . '], as expected');
+        logger('Album ID was [' . $ids['album'][$album->title] . '], as expected');
     }
 
     if (count($expected)) {
         throw new TestFailedException('Not all expected albums were found, missing [' . implode(', ', $expected) . ']');
     }
 
-    logger('All expected albums found');
+    logger('All expected albums found, and no unexpected ones');
 
     $jars->filesystem()->persist();
     $jars->filesystem()->revert();
@@ -161,7 +175,7 @@ function check_album_reports($expected)
 
 function check_artist_records($expected)
 {
-    global $artist_ids;
+    global $ids;
 
     info(__METHOD__);
 
@@ -209,9 +223,11 @@ function check_artist_records($expected)
 
         logger('Found artist was expected');
 
-        if ($id !== $artist_ids[$record->name]) {
-            throw new TestFailedException('Unexpected Artist ID: [' . $id . '], expected [' . $artist_ids[$record->name] . '] for artist [' . $record->name . ']');
+        if ($id !== $ids['artist'][$record->name]) {
+            throw new TestFailedException('Unexpected Artist ID: [' . $id . '], expected [' . $ids['artist'][$record->name] . '] for artist [' . $record->name . ']');
         }
+
+        logger('Artist ID was [' . $ids['artist'][$record->name] . '], as expected');
 
         unset($expected[$pos]);
     }
@@ -220,12 +236,12 @@ function check_artist_records($expected)
         throw new TestFailedException('Expected artist(s) not found: [' . print_r($expected, true) . ']');
     }
 
-    logger('Found all expected artists');
+    logger('Found all expected artists, and no unexpected ones');
 }
 
 function check_artist_reports($expected)
 {
-    global $artist_ids;
+    global $ids;
 
     info(__METHOD__);
 
@@ -259,18 +275,18 @@ function check_artist_reports($expected)
 
         unset($expected[$pos]);
 
-        if ($artist_ids[$artist->name] !== $artist->id) {
-            throw new TestFailedException('Unexpected id for artist: [' . $artist->name . ']: [' . $artist->id . '], expected [' . $artist_ids[$artist->name] . ']');
+        if ($ids['artist'][$artist->name] !== $artist->id) {
+            throw new TestFailedException('Unexpected id for artist: [' . $artist->name . ']: [' . $artist->id . '], expected [' . $ids['artist'][$artist->name] . ']');
         }
 
-        logger('Artist ID was [' . $artist_ids[$artist->name] . '], as expected');
+        logger('Artist ID was [' . $ids['artist'][$artist->name] . '], as expected');
     }
 
     if (count($expected)) {
         throw new TestFailedException('Not all expected artists were found, missing [' . implode(', ', $expected) . ']');
     }
 
-    logger('All expected artists found');
+    logger('All expected artists found, and no unexpected ones');
 
     $jars->filesystem()->persist();
     $jars->filesystem()->revert();
@@ -279,7 +295,9 @@ function check_artist_reports($expected)
 function do_test($name)
 {
     if (VERBOSE) {
-        echo "\n" . 'Running test [' . $name . ']' . "\n";
+        echo "\033[37m";
+        echo "\n\n" . ' Running test [' . $name . ']' . "\n\n";
+        echo "\033[39m";
     }
 
     $testfile = APP_HOME . '/src/php/test/' . $name . '.php';
@@ -293,13 +311,17 @@ function do_test($name)
 
 function logger($message) {
     if (VERBOSE) {
-        echo ' ✓ ' . $message . "\n";
+        echo "\033[32m";
+        echo '  ✓ ' . $message . "\n";
+        echo "\033[39m";
     }
 }
 
 function info($message) {
     if (VERBOSE) {
-        echo ' ⓘ ' . $message . "\n";
+        echo "\033[94m";
+        echo '  ⓘ ' . $message . "\n";
+        echo "\033[39m";
     }
 }
 
@@ -308,15 +330,15 @@ function refresh_reports()
     return trim(shell_exec(TEST_HOME . '/portals/music/cli.php -u music -p 983dk32dfmfa1s refresh'));
 }
 
-function save_expect(string $assetfile, callable $output_callback = null, callable $error_callback = null)
+function save_expect(array $data, callable $output_callback = null, callable $error_callback = null)
 {
     $jars = ApiClient::php(null, true);
     $jars->login(USERNAME, PASSWORD);
 
-    $output = $jars->save(json_decode(file_get_contents(APP_HOME . '/src/json/' . $assetfile . '.json')));
+    $output = $jars->save($data);
 
     if ($output_callback) {
-        $output_callback($output);
+        $output_callback($output, $data);
     }
 
     $jars->filesystem()->persist();
