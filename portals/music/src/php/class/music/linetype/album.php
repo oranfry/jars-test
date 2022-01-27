@@ -12,6 +12,10 @@ class album extends \Linetype
 
         $this->simple_strings('title');
 
+        $this->borrow = [
+            'artist_name' => fn ($line) : ?string => @$line->artist->name,
+        ];
+
         $this->inlinelinks = [
             (object) [
                 'property' => 'artist',
@@ -22,8 +26,13 @@ class album extends \Linetype
             ],
         ];
 
-        $this->borrow = [
-            'artist_name' => fn ($line) : ?string => @$line->artist->name,
+        $this->children = [
+            (object) [
+                'property' => 'tracks',
+                'linetype' => 'track',
+                'tablelink' => 'album_track',
+                'only_parent' => 'album_id',
+            ],
         ];
     }
 

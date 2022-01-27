@@ -8,13 +8,12 @@ class collection extends \Report
     {
         $this->listen = [
             'album' => (object) [
-                /*'children' => [
+                'children' => [
                     'tracks' => (object) ['sorter' => object_int_comparator('number')],
-                ],*/
-                'sorter' => object_string_comparator('title'),
+                ],
             ],
         ];
 
-        $this->sorter = object_string_comparator('title');
+        $this->sorter = fn (object $a, object $b) => strnatcasecmp($a->title, $b->title);
     }
 }
