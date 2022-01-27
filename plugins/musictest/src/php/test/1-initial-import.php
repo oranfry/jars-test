@@ -22,6 +22,8 @@ $artists = array_unique(array_values($album_artists));
 $albums = array_keys($album_artists);
 $artist_data = array_map(fn ($name) => (object) ['name' => $name, 'type' => 'artist'], $artists);
 
+shuffle($artist_data);
+
 save_expect($artist_data, function ($output) use ($artists, &$ids) {
     if (!is_array($output)) {
         throw new TestFailedException('Output expected to be an array');
@@ -72,7 +74,7 @@ save_expect($album_data, function ($output) use ($albums, &$ids) {
         $ids['album'][$item->title] = $item->id;
         unset($albums[$pos]);
 
-        logger('Found album [' . $item->title . '] with id [' . $item->id . ']');
+        logger('Found expected album [' . $item->title . '] with id [' . $item->id . ']');
     }
 
     if (count($albums)) {
