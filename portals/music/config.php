@@ -8,6 +8,8 @@ return (object) [
         'base' => 'music\config\base',
         'root' => 'music\config\base',
     ],
-    'requires' => [],
+    'requires' => [
+        WWW_HOME . '/plugins/hasimages',
+    ],
     'router' => 'music\Router',
 ];

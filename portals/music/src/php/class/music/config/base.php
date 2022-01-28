@@ -12,13 +12,19 @@ class base
 
         $this->linetypes = [
             'album' => (object) ['class' => 'music\linetype\album'],
+            'albumimageset' => (object) ['class' => 'music\linetype\albumimageset'],
             'artist' => (object) ['class' => 'music\linetype\artist'],
+            'image' => (object) ['class' => 'hasimages\linetype\image'],
+            'imagemeta' => (object) ['class' => 'music\linetype\imagemeta'],
+            'imagemetaplain' => (object) ['class' => 'music\linetype\imagemetaplain'],
+            'imageplain' => (object) ['class' => 'hasimages\linetype\imageplain'],
             'track' => (object) ['class' => 'music\linetype\track'],
         ];
 
         $this->reports = [
             'artists' => 'music\report\artists',
             'collection' => 'music\report\collection',
+            'imagemetas' => 'music\report\imagemetas',
         ];
 
         $this->sequence = (object) [
@@ -27,6 +33,14 @@ class base
             'max' => 100000000,
             'collisions' => [],
             'subs' => [],
+        ];
+
+        $this->tables = [
+            'image' => (object) [
+                'extension' => 'jpg',
+                'type' => 'image/jpeg',
+                'format' => 'binary',
+            ],
         ];
     }
 }

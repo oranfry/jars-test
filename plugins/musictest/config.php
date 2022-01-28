@@ -8,6 +8,7 @@ return (object) [
     ],
     'requires' => [
         TEST_HOME . '/portals/music',
+        WWW_HOME . '/plugins/hasimages',
         WWW_HOME . '/plugins/subsimple',
         WWW_HOME . '/plugins/apiclient',
         WWW_HOME . '/plugins/blends',

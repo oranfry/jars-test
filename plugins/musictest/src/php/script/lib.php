@@ -347,5 +347,17 @@ function save_expect(array $data, callable $output_callback = null, callable $er
     unset($jars);
 }
 
+function strip_non_scalars(array $objectArray)
+{
+    foreach ($objectArray as $object) {
+        foreach (array_keys(get_object_vars($object)) as $key) {
+            if (!is_null($object->$key) && !is_scalar($object->$key)) {
+                unset($object->$key);
+            }
+        }
+    }
+}
+
+
 class TestFailedException extends Exception {}
 class CouldNotTestException extends Exception {}
