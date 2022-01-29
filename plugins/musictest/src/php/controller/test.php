@@ -18,6 +18,8 @@ try {
     echo "\n";
     echo "That's all we know...\n";
     echo "\n\n\n";
+
+    die(1);
 }
 
 return [];
