@@ -16,7 +16,7 @@ class album extends \Linetype
 
         $this->table = 'album';
 
-        $this->simple_strings('title');
+        $this->simple_strings('title', 'comment');
 
         $this->borrow = [
             'artist_name' => fn ($line) : ?string => @$line->artist->name,
@@ -49,7 +49,7 @@ class album extends \Linetype
         parent::unpack($line, $oldline, $old_inlines);
 
         $line->artist = 'unchanged';
-        $line->comment = 'Album ' . $line->title;
+        $line->comment = $line->title;
 
         $this->music_hasimages_unpack($line, $oldline, $old_inlines);
     }

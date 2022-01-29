@@ -2,12 +2,6 @@
 
 global $ids;
 
-save_expect([(object) [
-    'type' => 'token',
-    'token' => '0a1d029281fc6623130266c76291e1162ce1d53e5e9a6b6f28d3a56796105249',
-    'ttl' => 999999999,
-]]);
-
 $album_artists = [
     'Hey U X' => 'Benee',
     'Sling' => 'Clairo',
@@ -84,4 +78,4 @@ save_expect($album_data, function ($output) use ($albums, &$ids) {
     logger('All expected albums found');
 });
 
-check_albums_and_artists($album_artists);
+return compact('album_artists');

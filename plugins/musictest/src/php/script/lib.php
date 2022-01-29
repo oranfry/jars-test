@@ -37,20 +37,6 @@ function check_album_artists($expected)
     $jars->filesystem()->revert();
 }
 
-function check_albums_and_artists(array $album_artists)
-{
-    $artists = array_unique(array_values($album_artists));
-    $albums = array_keys($album_artists);
-
-    check_artist_records($artists);
-    check_artist_reports($artists);
-
-    check_album_records($albums);
-    check_album_reports($albums);
-
-    check_album_artists($album_artists);
-}
-
 function check_album_records($expected)
 {
     global $ids;
@@ -292,7 +278,31 @@ function check_artist_reports($expected)
     $jars->filesystem()->revert();
 }
 
-function do_test($name)
+function do_change($change)
+{
+    if (VERBOSE) {
+        echo "\033[37m";
+        echo "\n\n" . ' Running change [' . $change . ']' . "\n\n";
+        echo "\033[39m";
+    }
+
+    $changefile = APP_HOME . '/src/php/changer/' . $change . '.php';
+
+    if (!is_file($changefile)) {
+        throw new CouldNotTestException('Test [' . $change . '] does not exist');
+    }
+
+    return require $changefile;
+}
+
+function do_change_and_test($change, $test)
+{
+    do_test($test, $data = do_change($change));
+    replay();
+    do_test($test, $data);
+}
+
+function do_test($name, $data)
 {
     if (VERBOSE) {
         echo "\033[37m";
@@ -305,6 +315,8 @@ function do_test($name)
     if (!is_file($testfile)) {
         throw new CouldNotTestException('Test [' . $name . '] does not exist');
     }
+
+    extract($data);
 
     require $testfile;
 }
@@ -321,6 +333,14 @@ function info($message) {
     if (VERBOSE) {
         echo "\033[94m";
         echo '  ⓘ ' . $message . "\n";
+        echo "\033[39m";
+    }
+}
+
+function fineprint($message) {
+    if (VERBOSE) {
+        echo "\033[90m";
+        echo '    ' . $message . "\n";
         echo "\033[39m";
     }
 }
@@ -358,6 +378,21 @@ function strip_non_scalars(array $objectArray)
     }
 }
 
+function replay()
+{
+    $db_home = TEST_HOME . '/db/music';
+    $master = $db_home . '/master.dat';
+    $master_backup = tempnam('/tmp', 'music-master-');
+    $cli_bin = TEST_HOME . '/portals/music/cli.php';
+
+    info('Replaying');
+
+    $output = `mv '$master' '$master_backup'; rm -rf '$db_home'; mkdir -p '$db_home'; touch '$master'; cat '$master_backup' | '$cli_bin' import -u music -p 983dk32dfmfa1s`;
+
+    foreach (explode("\n", $output) as $line) {
+        fineprint($line);
+    }
+}
 
 class TestFailedException extends Exception {}
 class CouldNotTestException extends Exception {}

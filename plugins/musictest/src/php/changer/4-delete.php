@@ -28,17 +28,18 @@ save_expect($data, function ($output, $original) use (&$ids) {
     logger('Array had ['. $expected . '] elements, as expected');
 });
 
-// removed 'Nomitori No Uta'
-
-check_albums_and_artists([
-    'Clean' => 'Soccer Mommy',
-    'Color Theory' => 'Soccer Mommy',
-    'dont smile at me' => 'Billie Eilish',
-    'Hey U X' => 'Benee',
-    'Immunity' => 'Clairo',
-    'Pure Heroine' => 'Lorde',
-    'Sling' => 'Clairo',
-    'Solar Power' => 'Lorde',
-    'The Court of Leaves' => 'Erutan',
-    'When We All Fall Asleep, Where Do We Go?' => 'Billie Eilish',
-]);
+return [
+    'album_artists' => [
+        'Clean' => 'Soccer Mommy',
+        'Color Theory' => 'Soccer Mommy',
+        'dont smile at me' => 'Billie Eilish',
+        'Hey U X' => 'Benee',
+        'Immunity' => 'Clairo',
+        // 'Nomitori No Uta' => 'Erutan', // removed
+        'Pure Heroine' => 'Lorde',
+        'Sling' => 'Clairo',
+        'Solar Power' => 'Lorde',
+        'The Court of Leaves' => 'Erutan',
+        'When We All Fall Asleep, Where Do We Go?' => 'Billie Eilish',
+    ],
+];
