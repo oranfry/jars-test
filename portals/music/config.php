@@ -8,8 +8,13 @@ return (object) [
         'base' => 'music\config\base',
         'root' => 'music\config\base',
     ],
+    'report_fields' => [
+        'artists' => ['name'],
+        'collection' => ['title', 'artist_name'],
+    ],
     'requires' => [
         WWW_HOME . '/plugins/hasimages',
     ],
+    'respect_newline_fields' => [],
     'router' => 'music\Router',
 ];
