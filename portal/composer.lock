@@ -1,0 +1,46 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "10b6c3319df500fd20bb8b3c8fc06131",
+    "packages": [
+        {
+            "name": "oranfry/hasimages",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oranfry/hasimages.git",
+                "reference": "8416fa15c2b2fb0f25afd6dcfc25008d47991d22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/8416fa15c2b2fb0f25afd6dcfc25008d47991d22",
+                "reference": "8416fa15c2b2fb0f25afd6dcfc25008d47991d22",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "hasimages\\": "classes"
+                }
+            },
+            "support": {
+                "source": "https://github.com/oranfry/hasimages/tree/master",
+                "issues": "https://github.com/oranfry/hasimages/issues"
+            },
+            "time": "2022-02-12T21:55:12+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
+}

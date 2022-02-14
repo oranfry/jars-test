@@ -1,0 +1,19 @@
+{
+    "name": "oranfry\/jars-test",
+    "version": "1.0.0",
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:oranfry\/hasimages.git"
+        }
+    ],
+    "require": {
+        "oranfry\/hasimages": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "music\\": "classes"
+        }
+    }
+}
