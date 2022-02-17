@@ -3,12 +3,9 @@
 use \jars\Jars;
 
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
-$jars->login(USERNAME, PASSWORD);
+$jars->login(USERNAME, PASSWORD, true);
 
-$version = refresh_reports();
-info('version: ' . $version);
-
-$collection = $jars->group('collection', 'all', $version);
+$collection = $jars->group('collection', 'all');
 
 foreach ($album_cover_external_ids as $album_title => $external_id) {
     if (!$album = @array_values(array_filter($collection, fn ($o) => $o->title == $album_title))[0]) {

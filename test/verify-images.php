@@ -2,15 +2,12 @@
 
 use \jars\Jars;
 
-$version = refresh_reports();
-info('version: ' . $version);
-
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
-$jars->login(USERNAME, PASSWORD);
+$jars->login(USERNAME, PASSWORD, true);
 
-$collection = $jars->group('collection', 'all', $version);
+$collection = $jars->group('collection', 'all');
 
-$metas = $jars->group('imagemetas', 'all', $version);
+$metas = $jars->group('imagemetas', 'all');
 $lookup = [];
 
 foreach ($album_covers as $album_title) {
@@ -42,3 +39,5 @@ foreach ($album_covers as $album_title) {
 
     logger('Cover image meta title was [' . $expected_meta_title . '], as expected');
 }
+
+unset($jars);

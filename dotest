@@ -7,7 +7,6 @@ const DB_HOME = '/tmp/jars-test-db';
 const VERBOSE = true;
 const USERNAME = 'music';
 const PASSWORD = '983dk32dfmfa1s';
-const AUTH_RANDOM_BITS = '0a1d029281fc6623130266c76291e1162ce1d53e5e9a6b6f28d3a56796105249';
 
 require TEST_HOME . '/lib.php';
 require TEST_HOME . '/vendor/autoload.php';

@@ -2,13 +2,10 @@
 
 use \jars\Jars;
 
-$version = refresh_reports();
-info('version: ' . $version);
-
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
-$jars->login(USERNAME, PASSWORD);
+$jars->login(USERNAME, PASSWORD, true);
 
-$collection = $jars->group('collection', 'all', $version);
+$collection = $jars->group('collection', 'all');
 
 foreach ($collection as $album) {
     if (array_key_exists($album->title, $album_tracks)) {

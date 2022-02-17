@@ -8,12 +8,10 @@ function check_album_artists($expected)
 
     info(__METHOD__);
 
-    $version = refresh_reports();
-    info('version: ' . $version);
-
     $jars = Jars::of(PORTAL_HOME, DB_HOME);
     $jars->login(USERNAME, PASSWORD, true);
-    $collection = $jars->group('collection', 'all', $version);
+
+    $collection = $jars->group('collection', 'all');
 
     foreach ($collection as $album) {
         $expected_artist_id = @$ids['artist'][@$expected[$album->title]];
@@ -34,9 +32,6 @@ function check_album_artists($expected)
 
         logger('Found expected artist name [' . @$expected[$album->title] . '] for album [' . $album->title . ']');
     }
-
-    $jars->filesystem()->persist();
-    $jars->filesystem()->revert();
 }
 
 function check_album_records($expected)
@@ -107,12 +102,10 @@ function check_album_reports($expected)
 
     info(__METHOD__);
 
-    $version = refresh_reports();
-    info('version: ' . $version);
-
     $jars = Jars::of(PORTAL_HOME, DB_HOME);
     $jars->login(USERNAME, PASSWORD, true);
-    $groups = $jars->groups('collection', $version);
+
+    $groups = $jars->groups('collection');
 
     if (count($groups) != 1) {
         throw new TestFailedException('Found [' . count($groups) . '] collection groups, expected 1');
@@ -126,7 +119,7 @@ function check_album_reports($expected)
 
     logger('Group is called [all], as expected');
 
-    $collection = $jars->group('collection', 'all', $version);
+    $collection = $jars->group('collection', 'all');
 
     // usleep(1000000);
     // $f = '/home/oran/Unsynched/dev/jars-test/db/music/reports/collection/all.json';
@@ -156,9 +149,6 @@ function check_album_reports($expected)
     }
 
     logger('All expected albums found, and no unexpected ones');
-
-    $jars->filesystem()->persist();
-    $jars->filesystem()->revert();
 }
 
 function check_artist_records($expected)
@@ -233,12 +223,10 @@ function check_artist_reports($expected)
 
     info(__METHOD__);
 
-    $version = refresh_reports();
-    info('version: ' . $version);
-
     $jars = Jars::of(PORTAL_HOME, DB_HOME);
     $jars->login(USERNAME, PASSWORD, true);
-    $groups = $jars->groups('artists', $version);
+
+    $groups = $jars->groups('artists');
 
     if (count($groups) != 1) {
         throw new TestFailedException('Found [' . count($groups) . '] artist groups, expected 1');
@@ -252,7 +240,7 @@ function check_artist_reports($expected)
 
     logger('Group is called [all], as expected');
 
-    $artists = $jars->group('artists', 'all', $version);
+    $artists = $jars->group('artists', 'all');
 
     foreach ($artists as $artist) {
         if (null === $pos = array_search(@$artist->name, $expected)) {
@@ -275,9 +263,6 @@ function check_artist_reports($expected)
     }
 
     logger('All expected artists found, and no unexpected ones');
-
-    $jars->filesystem()->persist();
-    $jars->filesystem()->revert();
 }
 
 function do_change($change)
@@ -306,6 +291,14 @@ function do_change_and_test($change, $test)
 
 function do_test($name, $data)
 {
+    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars->login(USERNAME, PASSWORD, true);
+    info('Refreshed to version ' . $jars->refresh());
+
+    $jars->filesystem()->persist()->revert();
+
+    unset($jars);
+
     if (VERBOSE) {
         echo "\033[37m";
         echo "\n\n" . ' Running test [' . $name . ']' . "\n\n";
@@ -347,12 +340,6 @@ function fineprint($message) {
     }
 }
 
-function refresh_reports()
-{
-    info('Refreshing');
-    return trim(shell_exec('AUTH_TOKEN=' . AUTH_TOKEN  . ' PORTAL_HOME=' . PORTAL_HOME . ' DB_HOME=' . DB_HOME . ' /home/oran/Unsynched/dev/usr/local/jars-refreshd/refresh.php'));
-}
-
 function save_expect(array $data, callable $output_callback = null, callable $error_callback = null)
 {
     $jars = Jars::of(PORTAL_HOME, DB_HOME);
@@ -364,8 +351,7 @@ function save_expect(array $data, callable $output_callback = null, callable $er
         $output_callback($output, $data);
     }
 
-    $jars->filesystem()->persist();
-    $jars->filesystem()->revert();
+    $jars->filesystem()->persist()->revert();
 
     unset($jars);
 }
@@ -386,7 +372,7 @@ function replay()
     $master = DB_HOME . '/master.dat';
     $master_backup = tempnam('/tmp', 'music-master-');
 
-    info('Replaying');
+    info('Replaying & Refreshing');
 
     $cmds = [
         "mv '" . $master . "' '" . $master_backup . "'",
@@ -401,6 +387,14 @@ function replay()
     foreach (explode("\n", $output) as $line) {
         fineprint($line);
     }
+
+    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars->login(USERNAME, PASSWORD, true);
+
+    info('Refreshed to version ' . $jars->refresh());
+    $jars->filesystem()->persist()->revert();
+
+    unset($jars);
 }
 
 class TestFailedException extends Exception {}
