@@ -17,7 +17,7 @@ $original_covers = [];
 $data = [];
 
 foreach ($album_covers as $album_title) {
-    $original_covers[$album_title] = $image_data = file_get_contents(TEST_HOME . '/assets/album_covers/' . $album_title . '.jpg');
+    $original_covers[$album_title] = $image_data = file_get_contents(TEST_HOME . '/asset/album_covers/' . $album_title . '.jpg');
 
     $data[] = (object) [
         'id' => $ids['album'][$album_title],
