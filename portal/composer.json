@@ -5,7 +5,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:oranfry\/hasimages.git"
+            "url": "https:\/\/github.com\/oranfry\/hasimages.git"
         }
     ],
     "require": {

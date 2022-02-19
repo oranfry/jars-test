@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10b6c3319df500fd20bb8b3c8fc06131",
+    "content-hash": "b2c9aa7de0d2ae8235307d54a9030d27",
     "packages": [
         {
             "name": "oranfry/hasimages",

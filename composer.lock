@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1048a3a908dd41e1bd589b2f2e5d812e",
+    "content-hash": "18651a6160d049b69075be3bea3290e7",
     "packages": [
         {
             "name": "oranfry/jars-contracts",
