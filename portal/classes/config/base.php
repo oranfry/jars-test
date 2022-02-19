@@ -42,5 +42,11 @@ class base
                 'format' => 'binary',
             ],
         ];
+
+        $this->report_fields = [
+            'artists' => ['name'],
+            'collection' => ['title', 'artist_name'],
+            'imagemetas' => ['title'],
+        ];
     }
 }
