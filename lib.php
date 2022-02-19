@@ -380,6 +380,7 @@ function replay()
         "mkdir -p '" . DB_HOME . "'",
         "touch '" . $master . "'",
         "cat '" . $master_backup . "' | jars '--portal-home=" . PORTAL_HOME . "' '--db-home=" . DB_HOME . "' import -u " . USERNAME . " -p " . PASSWORD,
+        "rm '" . $master_backup . "'",
     ];
 
     $output = shell_exec(implode('; ', $cmds));
