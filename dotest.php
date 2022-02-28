@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 
 const TEST_HOME = __DIR__;
@@ -9,7 +8,6 @@ const USERNAME = 'music';
 const PASSWORD = '983dk32dfmfa1s';
 
 require TEST_HOME . '/lib.php';
-require TEST_HOME . '/vendor/autoload.php';
 
 shell_exec('rm -rf "' . DB_HOME . '"; mkdir "' . DB_HOME . '"');
 
