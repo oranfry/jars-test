@@ -1,5 +1,11 @@
 <?php
 
+if (!defined('BIN_HOME')) {
+    error_log(__FILE__ . ': Please define BIN_HOME before require me.');
+
+    die(1);
+}
+
 const TEST_HOME = __DIR__;
 const PORTAL_HOME = TEST_HOME . '/portal';
 const DB_HOME = '/tmp/jars-test-db';

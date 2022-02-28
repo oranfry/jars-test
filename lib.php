@@ -379,7 +379,7 @@ function replay()
         "rm -rf '" . DB_HOME . "'",
         "mkdir -p '" . DB_HOME . "'",
         "touch '" . $master . "'",
-        "cat '" . $master_backup . "' | jars '--portal-home=" . PORTAL_HOME . "' '--db-home=" . DB_HOME . "' import -u " . USERNAME . " -p " . PASSWORD,
+        "cat '" . $master_backup . "' | '" . BIN_HOME . "/jars' '--portal-home=" . PORTAL_HOME . "' '--db-home=" . DB_HOME . "' import -u " . USERNAME . " -p " . PASSWORD,
         "rm '" . $master_backup . "'",
     ];
 
