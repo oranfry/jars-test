@@ -29,17 +29,5 @@ save_expect($data, function ($output, $original) use (&$ids) {
 });
 
 return [
-    'album_artists' => [
-        'Clean' => 'Soccer Mommy',
-        'Color Theory' => 'Soccer Mommy',
-        'dont smile at me' => 'Billie Eilish',
-        'Hey U X' => 'Benee',
-        'Immunity' => 'Clairo',
-        // 'Nomitori No Uta' => 'Erutan', // removed
-        'Pure Heroine' => 'Lorde',
-        'Sling' => 'Clairo',
-        'Solar Power' => 'Lorde',
-        'The Court of Leaves' => 'Erutan',
-        'When We All Fall Asleep, Where Do We Go?' => 'Billie Eilish',
-    ],
+    'album_artists' => require TEST_HOME . '/asset/data/album-artists-3.php',
 ];

@@ -2,6 +2,8 @@
 
 namespace music\linetype;
 
+use DateTime;
+
 class album extends \jars\Linetype
 {
     use traight\hasimages;
@@ -16,10 +18,12 @@ class album extends \jars\Linetype
 
         $this->table = 'album';
 
-        $this->simple_strings('title', 'comment');
+        $this->simple_strings('title', 'comment', 'released');
+        $this->simple_ints('timestamp');
 
         $this->borrow = [
             'artist_name' => fn ($line) : ?string => @$line->artist->name,
+            'age' => fn ($line) : ?int => @$line->released ? (int) (new DateTime(date('Y-m-d', $line->timestamp)))->diff(new DateTime($line->released))->format('%y') : null,
         ];
 
         $this->inlinelinks = [
@@ -42,6 +46,13 @@ class album extends \jars\Linetype
         ];
 
         $this->music_hasimages_init();
+    }
+
+    public function complete($line) : void
+    {
+        if (!@$line->timestamp) {
+            $line->timestamp = time();
+        }
     }
 
     public function unpack($line, $oldline, $old_inlines)

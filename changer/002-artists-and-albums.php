@@ -2,15 +2,7 @@
 
 global $ids;
 
-$album_artists = [
-    'Hey U X' => 'Benee',
-    'Sling' => 'Clairo',
-    'Solar Power' => 'Lorde',
-    'dont smile at me' => 'Billie Eilish',
-    'Color Theory' => 'Soccer Mommy',
-    'Immunity' => 'Clairo',
-    'When We All Fall Asleep, Where Do We Go?' => 'Billie Eilish',
-];
+$album_artists = require TEST_HOME . '/asset/data/album-artists-1.php';
 
 $artists = array_unique(array_values($album_artists));
 $albums = array_keys($album_artists);

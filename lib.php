@@ -31,7 +31,15 @@ function check_album_artists($expected)
         }
 
         logger('Found expected artist name [' . @$expected[$album->title] . '] for album [' . $album->title . ']');
+
+        unset($expected[$album->title]);
     }
+
+    if (count($expected)) {
+        throw new TestFailedException('Not all expected albums were found, missing [' . implode(', ', array_keys($expected)) . ']');
+    }
+
+    logger('All expected albums found, and no unexpected ones');
 }
 
 function check_album_records($expected)
@@ -352,6 +360,22 @@ function save_expect(array $data, callable $output_callback = null, callable $er
     }
 
     $jars->filesystem()->persist()->revert();
+
+    unset($jars);
+}
+
+function preview_expect(array $data, callable $output_callback = null, callable $error_callback = null)
+{
+    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars->login(USERNAME, PASSWORD, true);
+
+    $output = $jars->preview($data);
+
+    if ($output_callback) {
+        $output_callback($output, $data);
+    }
+
+    $jars->filesystem()->persist()->revert(); // give enough rope...
 
     unset($jars);
 }

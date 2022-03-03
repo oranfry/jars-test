@@ -7,7 +7,7 @@ class base
     function __construct()
     {
         $this->instance_name = 'Music';
-        $this->root_password = '983dk32dfmfa1s';
+        $this->root_password = '123456';
         $this->root_username = 'music';
 
         $this->linetypes = [

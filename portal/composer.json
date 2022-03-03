@@ -4,8 +4,8 @@
     "minimum-stability": "dev",
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https:\/\/github.com\/oranfry\/hasimages.git"
+            "type": "path",
+            "url": "\/home\/oran\/Unsynched\/dev\/oranfry\/hasimages"
         }
     ],
     "require": {

@@ -2,16 +2,7 @@
 
 global $ids;
 
-$album_covers = [
-    'Clean',
-    'Color Theory',
-    'dont smile at me',
-    'Hey U X',
-    'Immunity',
-    'Pure Heroine',
-    'Solar Power',
-    'When We All Fall Asleep, Where Do We Go?',
-];
+$album_covers = require TEST_HOME . '/asset/data/album-covers.php';
 
 $original_covers = [];
 $data = [];

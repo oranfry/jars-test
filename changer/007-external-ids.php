@@ -1,16 +1,8 @@
 <?php
 
-use \jars\Jars;
+use jars\Jars;
 
-$album_cover_external_ids = [
-    'Clean' => 61,
-    'Color Theory' => 32,
-    'dont smile at me' => 13,
-    'Hey U X' => 54,
-    'Immunity' => 45,
-    'Pure Heroine' => 76,
-    'Solar Power' => 27,
-];
+$album_cover_external_ids = require TEST_HOME . '/asset/data/album-cover-external-ids.php';
 
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);

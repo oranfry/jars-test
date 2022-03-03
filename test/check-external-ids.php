@@ -1,6 +1,6 @@
 <?php
 
-use \jars\Jars;
+use jars\Jars;
 
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);

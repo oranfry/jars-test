@@ -11,7 +11,7 @@ const PORTAL_HOME = TEST_HOME . '/portal';
 const DB_HOME = '/tmp/jars-test-db';
 const VERBOSE = true;
 const USERNAME = 'music';
-const PASSWORD = '983dk32dfmfa1s';
+const PASSWORD = '123456';
 
 require TEST_HOME . '/lib.php';
 
