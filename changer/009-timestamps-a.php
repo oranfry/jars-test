@@ -17,9 +17,12 @@ $data = array_map(function ($album_title) use ($collection, $release_dates) {
     return $album;
 }, array_keys($release_dates));
 
-save_expect($data, function ($output, $original) use ($release_dates) {
-    var_dump($output); die();
+$ages = [
+    'Clean' => 3,
+    'Color Theory' => 2,
+];
 
+$expect_callback = function ($output, $original) use ($release_dates, $ages) {
     foreach ($output as $album) {
         if (!@$album->title) {
             throw new TestFailedException('Album came back with no title');
@@ -29,15 +32,25 @@ save_expect($data, function ($output, $original) use ($release_dates) {
             throw new TestFailedException('Unexpected album title came back');
         }
 
+        logger('Album [' . $album->title . '] is expected');
+
         if ($album->released !== $expected_released) {
             throw new TestFailedException('Incorrect album release date for album [' . $album->title . ']: [' . $album->released . '], expected [' . $expected_released . ']');
         }
-    }
-});
 
-$ages = [
-    'Clean' => 3,
-    'Color Theory' => 2,
-];
+        logger('Correct album release date for album [' . $album->title . ']: [' . $expected_released . ']');
+
+        if ($ages[$album->title] !== $album->age) {
+            throw new TestFailedException('Album [' . $album->title . '] came back with unexpected age [' . $album->age . '], expected [' . $ages[$album->title] . ']');
+        }
+
+        logger('Album [' . $album->title . '] came back with expected age: [' . $ages[$album->title] . ']');
+    }
+};
+
+info('preview');
+preview_expect($data, $expect_callback);
+info('save');
+save_expect($data, $expect_callback);
 
 return compact('release_dates', 'ages');

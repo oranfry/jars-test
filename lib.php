@@ -303,7 +303,10 @@ function do_test($name, $data)
     $jars->login(USERNAME, PASSWORD, true);
     info('Refreshed to version ' . $jars->refresh());
 
-    $jars->filesystem()->persist()->revert();
+    $jars
+        ->filesystem()
+        ->persist()
+        ->revert();
 
     unset($jars);
 
@@ -359,7 +362,10 @@ function save_expect(array $data, callable $output_callback = null, callable $er
         $output_callback($output, $data);
     }
 
-    $jars->filesystem()->persist()->revert();
+    $jars
+        ->filesystem()
+        ->persist()
+        ->revert();
 
     unset($jars);
 }
