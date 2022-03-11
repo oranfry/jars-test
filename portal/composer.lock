@@ -4,25 +4,34 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1064650ddb03df805d6c94dc0a6d50d",
+    "content-hash": "b2c9aa7de0d2ae8235307d54a9030d27",
     "packages": [
         {
             "name": "oranfry/hasimages",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "/home/oran/Unsynched/dev/oranfry/hasimages",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oranfry/hasimages.git",
                 "reference": "64828b8fe2c457d26f9ea63e66999019727a563d"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/64828b8fe2c457d26f9ea63e66999019727a563d",
+                "reference": "64828b8fe2c457d26f9ea63e66999019727a563d",
+                "shasum": ""
+            },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "hasimages\\": "classes"
                 }
             },
-            "transport-options": {
-                "relative": false
-            }
+            "support": {
+                "source": "https://github.com/oranfry/hasimages/tree/master",
+                "issues": "https://github.com/oranfry/hasimages/issues"
+            },
+            "time": "2022-02-17T10:29:23+00:00"
         }
     ],
     "packages-dev": [],
