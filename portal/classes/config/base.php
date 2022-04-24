@@ -14,6 +14,7 @@ class base
             'album' => (object) ['class' => 'music\linetype\album'],
             'albumimageset' => (object) ['class' => 'music\linetype\albumimageset'],
             'artist' => (object) ['class' => 'music\linetype\artist'],
+            'download' => (object) ['class' => 'music\linetype\download'],
             'image' => (object) ['class' => 'hasimages\linetype\image'],
             'imagemeta' => (object) ['class' => 'music\linetype\imagemeta'],
             'imagemetaplain' => (object) ['class' => 'music\linetype\imagemetaplain'],
@@ -24,6 +25,7 @@ class base
         $this->reports = [
             'artists' => 'music\report\artists',
             'collection' => 'music\report\collection',
+            'downloads' => 'music\report\downloads',
             'imagemetas' => 'music\report\imagemetas',
         ];
 
