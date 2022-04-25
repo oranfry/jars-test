@@ -327,26 +327,27 @@ function do_test($name, $data)
     require $testfile;
 }
 
-function logger($message) {
-    if (VERBOSE) {
-        echo "\033[32m";
-        echo '  ✓ ' . $message . "\n";
-        echo "\033[39m";
-    }
-}
-
-function info($message) {
-    if (VERBOSE) {
-        echo "\033[94m";
-        echo '  ⓘ ' . $message . "\n";
-        echo "\033[39m";
-    }
+function change($message) {
+    message('δ', $message, "\033[33m");
 }
 
 function fineprint($message) {
+    message(' ', $message, "\033[90m");
+}
+
+function info($message) {
+    message('ℹ', $message, "\033[94m");
+}
+
+function logger($message) {
+    message('✓', $message, "\033[32m");
+}
+
+function message(string $symbol, string $message, string $color)
+{
     if (VERBOSE) {
-        echo "\033[90m";
-        echo '    ' . $message . "\n";
+        echo $color;
+        echo '  ' . $symbol . ' ' . $message . "\n";
         echo "\033[39m";
     }
 }

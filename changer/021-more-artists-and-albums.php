@@ -28,6 +28,24 @@ $data = [
 
 shuffle($data);
 
+foreach ($data as $line) {
+    switch ($line->type) {
+        case 'artist':
+            change('Added artist [' . $line->name . ']');
+
+            foreach ($line->albums ?? [] as $album) {
+                change('Added nested album [' . $album->title . ']');
+            }
+
+            break;
+
+        case 'album':
+            change('Added album [' . $line->title . ']');
+
+            break;
+    }
+}
+
 save_expect($data, function ($output, $original) use (&$ids) {
     if (!is_array($output)) {
         throw new TestFailedException('Output expected to be an array');

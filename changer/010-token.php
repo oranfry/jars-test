@@ -1,5 +1,7 @@
 <?php
 
+change('Added initial token');
+
 save_expect([(object) [
     'type' => 'token',
     'token' => '0a1d029281fc6623130266c76291e1162ce1d53e5e9a6b6f28d3a56796105249',

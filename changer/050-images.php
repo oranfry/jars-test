@@ -15,6 +15,8 @@ foreach ($album_covers as $album_title) {
         'type' => 'albumimageset',
         'cover' => base64_encode($image_data),
     ];
+
+    change('Added cover image for album [' . $album_title . ']');
 }
 
 shuffle($data);

@@ -12,6 +12,10 @@ $data = [
 
 shuffle($data);
 
+foreach ($data as $line) {
+    change('Deleted album [' . $line->id . ']');
+}
+
 save_expect($data, function ($output, $original) use (&$ids) {
     if (!is_array($output)) {
         throw new TestFailedException('Output expected to be an array');

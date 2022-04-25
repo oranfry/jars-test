@@ -10,6 +10,10 @@ $artist_data = array_map(fn ($name) => (object) ['name' => $name, 'type' => 'art
 
 shuffle($artist_data);
 
+foreach ($artist_data as $line) {
+    change('Added artist [' . $line->name . ']');
+}
+
 save_expect($artist_data, function ($output) use ($artists, &$ids) {
     if (!is_array($output)) {
         throw new TestFailedException('Output expected to be an array');
@@ -40,6 +44,10 @@ save_expect($artist_data, function ($output) use ($artists, &$ids) {
 });
 
 $album_data = array_map(fn ($album_title, $artist_name) => (object) ['type' => 'album', 'title' => $album_title, 'artist_id' => $ids['artist'][$artist_name]], array_keys($album_artists), $album_artists);
+
+foreach ($album_data as $line) {
+    change('Added album [' . $line->title . ']');
+}
 
 save_expect($album_data, function ($output) use ($albums, &$ids) {
     if (!is_array($output)) {

@@ -14,6 +14,8 @@ foreach ($album_tracks as $album => $tracks) {
             'title' => $track_title,
             'type' => 'track',
         ];
+
+        change('Added track [' . $track_title . '] to album [' . $album . ']');
     }
 }
 
