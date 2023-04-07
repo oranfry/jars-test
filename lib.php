@@ -306,7 +306,7 @@ function do_test($name, $data)
     $jars
         ->filesystem()
         ->persist()
-        ->revert();
+        ->reset();
 
     unset($jars);
 
@@ -366,7 +366,7 @@ function save_expect(array $data, callable $output_callback = null, callable $er
     $jars
         ->filesystem()
         ->persist()
-        ->revert();
+        ->reset();
 
     unset($jars);
 }
@@ -382,7 +382,7 @@ function preview_expect(array $data, callable $output_callback = null, callable 
         $output_callback($output, $data);
     }
 
-    $jars->filesystem()->persist()->revert(); // give enough rope...
+    $jars->filesystem()->persist()->reset(); // give enough rope...
 
     unset($jars);
 }
@@ -424,7 +424,7 @@ function replay()
     $jars->login(USERNAME, PASSWORD, true);
 
     info('Refreshed to version ' . $jars->refresh());
-    $jars->filesystem()->persist()->revert();
+    $jars->filesystem()->persist()->reset();
 
     unset($jars);
 }
