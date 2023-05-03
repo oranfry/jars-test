@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2c9aa7de0d2ae8235307d54a9030d27",
+    "content-hash": "78f23e35cfe619993bbb9a3a5837a043",
     "packages": [
         {
             "name": "oranfry/hasimages",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/oranfry/hasimages.git",
-                "reference": "64828b8fe2c457d26f9ea63e66999019727a563d"
+                "reference": "a84b4e26cffee9648c6e611811ca481712328bdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/64828b8fe2c457d26f9ea63e66999019727a563d",
-                "reference": "64828b8fe2c457d26f9ea63e66999019727a563d",
+                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/a84b4e26cffee9648c6e611811ca481712328bdb",
+                "reference": "a84b4e26cffee9648c6e611811ca481712328bdb",
                 "shasum": ""
             },
             "default-branch": true,
@@ -31,7 +31,34 @@
                 "source": "https://github.com/oranfry/hasimages/tree/master",
                 "issues": "https://github.com/oranfry/hasimages/issues"
             },
-            "time": "2022-02-17T10:29:23+00:00"
+            "time": "2023-05-05T23:02:07+00:00"
+        },
+        {
+            "name": "oranfry/simple-fields",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oranfry/simple-fields.git",
+                "reference": "e912014b2fbd3b906050a1ad99bb965d36a9ea1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oranfry/simple-fields/zipball/e912014b2fbd3b906050a1ad99bb965d36a9ea1b",
+                "reference": "e912014b2fbd3b906050a1ad99bb965d36a9ea1b",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "simplefields\\": "classes"
+                }
+            },
+            "support": {
+                "source": "https://github.com/oranfry/simple-fields/tree/master",
+                "issues": "https://github.com/oranfry/simple-fields/issues"
+            },
+            "time": "2023-05-04T01:40:46+00:00"
         }
     ],
     "packages-dev": [],

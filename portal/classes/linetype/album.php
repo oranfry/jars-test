@@ -6,6 +6,7 @@ use DateTime;
 
 class album extends \jars\Linetype
 {
+    use \simplefields\traits\SimpleFields;
     use traight\hasimages;
 
     const IMAGE_SIZES = [

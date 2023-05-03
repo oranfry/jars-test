@@ -4,6 +4,8 @@ namespace music\linetype;
 
 class artist extends \jars\Linetype
 {
+    use \simplefields\traits\SimpleFields;
+
     function __construct()
     {
         parent::__construct();

@@ -1,19 +1,24 @@
 {
-    "name": "oranfry/jars-test",
-    "version": "1.0.0",
-    "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/oranfry/hasimages.git"
-        }
-    ],
-    "require": {
-        "oranfry/hasimages": "*"
-    },
     "autoload": {
         "psr-4": {
             "music\\": "classes"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "name": "oranfry/jars-test-portal",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/oranfry/hasimages.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/oranfry/simple-fields.git"
+        }
+    ],
+    "require": {
+        "oranfry/hasimages": "*",
+        "oranfry/simple-fields": "*"
+    },
+    "version": "1.0.0"
 }
