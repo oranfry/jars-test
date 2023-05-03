@@ -10,6 +10,6 @@ class download extends \jars\Linetype
 
         $this->table = 'download';
 
-        $this->simple_strings('url');
+        $this->simple_string('url');
     }
 }

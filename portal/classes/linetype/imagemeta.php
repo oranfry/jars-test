@@ -8,6 +8,6 @@ class imagemeta extends \hasimages\linetype\imagemeta
     {
         parent::__construct();
 
-        $this->simple_ints('external_id');
+        $this->simple_int('external_id');
     }
 }

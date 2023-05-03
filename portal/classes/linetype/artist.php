@@ -10,7 +10,7 @@ class artist extends \jars\Linetype
 
         $this->table = 'artist';
 
-        $this->simple_strings('name');
+        $this->simple_string('name');
 
         $this->children = [
             (object) [

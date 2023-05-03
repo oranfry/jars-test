@@ -10,8 +10,8 @@ class track extends \jars\Linetype
 
         $this->table = 'track';
 
-        $this->simple_ints('number');
-        $this->simple_strings('title');
+        $this->simple_int('number');
+        $this->simple_string('title');
 
         $this->borrow = [
             'download_url' => fn ($line) => $line->download->url ?? null,

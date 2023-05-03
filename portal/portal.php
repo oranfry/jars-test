@@ -2,4 +2,4 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-return new \music\config\base();
+return new music\JarsConfig;

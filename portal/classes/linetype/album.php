@@ -18,8 +18,10 @@ class album extends \jars\Linetype
 
         $this->table = 'album';
 
-        $this->simple_strings('title', 'comment', 'released');
-        $this->simple_ints('timestamp');
+        $this->simple_string('title');
+        $this->simple_string('comment');
+        $this->simple_string('released');
+        $this->simple_int('timestamp');
 
         $this->borrow = [
             'artist_name' => fn ($line) : ?string => @$line->artist->name,
