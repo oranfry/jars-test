@@ -8,7 +8,7 @@ $album_cover_external_ids = require TEST_HOME . '/asset/data/album-cover-externa
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);
 
-$collection = $jars->group('collection', 'all');
+$collection = $jars->group('collection');
 $data = [];
 
 foreach ($album_cover_external_ids as $album_title => $external_id) {

@@ -6,7 +6,7 @@ use obex\Obex;
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);
 
-$collection = $jars->group('collection', 'all');
+$collection = $jars->group('collection');
 
 foreach ($release_dates as $album_title => $released) {
     if (!$album = Obex::find($collection, 'title', 'is', $album_title)) {

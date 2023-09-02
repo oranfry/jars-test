@@ -5,7 +5,7 @@ use jars\Jars;
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);
 
-$collection = $jars->group('collection', 'all');
+$collection = $jars->group('collection');
 
 foreach ($collection as $album) {
     if (array_key_exists($album->title, $album_tracks)) {

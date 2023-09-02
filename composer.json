@@ -1,9 +1,7 @@
 {
-    "minimum-stability": "dev",
-    "name": "oranfry\/jars-test",
+    "name": "oranfry/jars-test",
     "require": {
-        "oranfry\/jars-core": "*",
-        "oranfry\/obex": "*"
-    },
-    "version": "1.0.0"
+        "oranfry/jars-core": "*",
+        "oranfry/obex": "*"
+    }
 }

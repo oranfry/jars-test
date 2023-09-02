@@ -7,8 +7,8 @@ $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);
 
 $collection_download_urls = require TEST_HOME . '/asset/data/download-urls-2.php';
-$collection = $jars->group('collection', 'all');
-$downloads = $jars->group('downloads', 'all');
+$collection = $jars->group('collection');
+$downloads = $jars->group('downloads');
 
 $data = [];
 

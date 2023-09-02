@@ -7,7 +7,7 @@ $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);
 
 $collection_download_urls = require TEST_HOME . '/asset/data/download-urls-1.php';
-$collection = $jars->group('collection', 'all');
+$collection = $jars->group('collection');
 
 $data = array_merge(...array_map(function ($album_title) use ($collection, $collection_download_urls) {
     $album = Obex::find($collection, 'title', 'is', $album_title);

@@ -5,9 +5,9 @@ use jars\Jars;
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);
 
-$collection = $jars->group('collection', 'all');
+$collection = $jars->group('collection');
 
-$metas = $jars->group('imagemetas', 'all');
+$metas = $jars->group('imagemetas');
 $lookup = [];
 
 foreach ($album_covers as $album_title) {

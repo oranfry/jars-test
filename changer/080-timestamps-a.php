@@ -7,7 +7,7 @@ $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);
 
 $release_dates = require TEST_HOME . '/asset/data/release-dates.php';
-$collection = $jars->group('collection', 'all');
+$collection = $jars->group('collection');
 
 $data = array_map(function ($album_title) use ($collection, $release_dates) {
     $album = Obex::find($collection, 'title', 'is', $album_title);

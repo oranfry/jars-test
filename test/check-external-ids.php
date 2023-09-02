@@ -6,7 +6,7 @@ use obex\Obex;
 $jars = Jars::of(PORTAL_HOME, DB_HOME);
 $jars->login(USERNAME, PASSWORD, true);
 
-$collection = $jars->group('collection', 'all');
+$collection = $jars->group('collection');
 
 foreach ($album_cover_external_ids as $album_title => $external_id) {
     if (!$album = @array_values(array_filter($collection, fn ($o) => $o->title == $album_title))[0]) {
@@ -20,7 +20,7 @@ foreach ($album_cover_external_ids as $album_title => $external_id) {
     logger('Cover image external_id was [' . $external_id . '], as expected');
 }
 
-$imagemetas = $jars->group('imagemetas', 'all');
+$imagemetas = $jars->group('imagemetas');
 
 foreach ($album_cover_external_ids as $album_title => $external_id) {
     if (!$album = @array_values(array_filter($collection, fn ($o) => $o->title == $album_title))[0]) {

@@ -11,7 +11,7 @@ function check_album_artists($expected)
     $jars = Jars::of(PORTAL_HOME, DB_HOME);
     $jars->login(USERNAME, PASSWORD, true);
 
-    $collection = $jars->group('collection', 'all');
+    $collection = $jars->group('collection');
 
     foreach ($collection as $album) {
         $expected_artist_id = @$ids['artist'][@$expected[$album->title]];
@@ -121,20 +121,13 @@ function check_album_reports($expected)
 
     logger('Found 1 collection group, as expected');
 
-    if (reset($groups) != 'all') {
-        throw new TestFailedException('Expected group to be called [all], got [' . reset($groups) . ']');
+    if (reset($groups) != '') {
+        throw new TestFailedException('Expected group to be called [], got [' . reset($groups) . ']');
     }
 
-    logger('Group is called [all], as expected');
+    logger('Group is called [], as expected');
 
-    $collection = $jars->group('collection', 'all');
-
-    // usleep(1000000);
-    // $f = '/home/oran/Unsynched/dev/jars-test/db/music/reports/collection/all.json';
-    // var_dump($jars->filesystem()->getStore());
-    // echo $jars->filesystem()->get($f) . "\n\n";
-    // echo file_get_contents($f) . "\n\n";
-    // var_dump($collection);
+    $collection = $jars->group('collection');
 
     foreach ($collection as $album) {
         if (null === $pos = array_search(@$album->title, $expected)) {
@@ -242,13 +235,13 @@ function check_artist_reports($expected)
 
     logger('Found 1 artist group, as expected');
 
-    if (reset($groups) != 'all') {
-        throw new TestFailedException('Expected group to be called [all], got [' . reset($groups) . ']');
+    if (reset($groups) != '') {
+        throw new TestFailedException('Expected group to be called [], got [' . reset($groups) . ']');
     }
 
-    logger('Group is called [all], as expected');
+    logger('Group is called [], as expected');
 
-    $artists = $jars->group('artists', 'all');
+    $artists = $jars->group('artists');
 
     foreach ($artists as $artist) {
         if (null === $pos = array_search(@$artist->name, $expected)) {
