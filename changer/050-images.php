@@ -13,6 +13,7 @@ foreach ($album_covers as $album_title) {
     $data[] = (object) [
         'id' => $ids['album'][$album_title],
         'type' => 'albumimageset',
+        'comment' => $album_title,
         'cover' => base64_encode($image_data),
     ];
 
