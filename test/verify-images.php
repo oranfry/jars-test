@@ -1,8 +1,6 @@
 <?php
 
-use jars\Jars;
-
-$jars = Jars::of(PORTAL_HOME, DB_HOME);
+$jars = fresh_jars();
 $jars->login(USERNAME, PASSWORD, true);
 
 $collection = $jars->group('collection');

@@ -7,11 +7,13 @@ if (!defined('BIN_HOME')) {
 }
 
 const TEST_HOME = __DIR__;
-const PORTAL_HOME = TEST_HOME . '/portal';
-const DB_HOME = '/tmp/jars-test-db';
+const DB_HOME = '/var/tmp/jars-test-db';
+const CONNECTION_STRING = 'local:music\\JarsConfig,' . DB_HOME;
 const VERBOSE = true;
 const USERNAME = 'music';
 const PASSWORD = '123456';
+
+require __DIR__ . '/portal/vendor/autoload.php';
 
 require TEST_HOME . '/lib.php';
 

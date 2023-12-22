@@ -1,11 +1,10 @@
 <?php
 
-use jars\Jars;
 use obex\Obex;
 
 $album_cover_external_ids = require TEST_HOME . '/asset/data/album-cover-external-ids-2.php';
 
-$jars = Jars::of(PORTAL_HOME, DB_HOME);
+$jars = fresh_jars();
 $jars->login(USERNAME, PASSWORD, true);
 
 $collection = $jars->group('collection');

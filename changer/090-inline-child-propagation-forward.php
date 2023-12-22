@@ -1,9 +1,8 @@
 <?php
 
 use obex\Obex;
-use jars\Jars;
 
-$jars = Jars::of(PORTAL_HOME, DB_HOME);
+$jars = fresh_jars();
 $jars->login(USERNAME, PASSWORD, true);
 
 $collection_download_urls = require TEST_HOME . '/asset/data/download-urls-1.php';

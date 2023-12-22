@@ -1,6 +1,5 @@
 <?php
 
-use jars\Jars;
 
 global $ids;
 

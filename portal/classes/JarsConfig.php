@@ -2,19 +2,45 @@
 
 namespace music;
 
-class JarsConfig
+use jars\Sequence as Sequence;
+
+class JarsConfig implements \jars\contract\Config
 {
-    public $linetypes;
-    public $report_fields;
-    public $reports;
-    public $root_password = '123456';
-    public $root_username = 'music';
-    public $sequence;
-    public $tables;
+    private Sequence $sequence;
 
     function __construct()
     {
-        $this->linetypes = [
+        $this->sequence = new Sequence('zYuDd1mlcYByTDJixZXPDC1MMcO3RklrejRhO55dVQw=', 100000000);
+    }
+
+    public function credentialsCorrect(string $username, string $password): bool
+    {
+        if ($username !== 'music') {
+            return false;
+        }
+
+        // return $password === '123456';
+        // done better:
+
+        $salt = 'pXAkEnaH;8T.evC4Q[cS:z5\'7*2?ruqB>Y,yU&DdJR$ZN=K%mL';
+        $expected_hash = '6d07e512f62e1a3e892856f59b6af7823325c9bcb4f0d1b6e4a76df43eae0385';
+
+        return hash('sha256', $salt . $password) === $expected_hash;
+    }
+
+    public function download_fields(): array
+    {
+        return [];
+    }
+
+    public function float_dp(): array
+    {
+        return [];
+    }
+
+    public function linetypes(): array
+    {
+        return [
             'album' => \music\linetype\album::class,
             'albumimageset' => \music\linetype\albumimageset::class,
             'artist' => \music\linetype\artist::class,
@@ -23,35 +49,48 @@ class JarsConfig
             'imagemeta' => \music\linetype\imagemeta::class,
             'imagemetaplain' => \music\linetype\imagemetaplain::class,
             'imageplain' => \hasimages\linetype\imageplain::class,
+            'token' => \jars\linetype\token::class,
             'track' => \music\linetype\track::class,
         ];
+    }
 
-        $this->reports = [
+    public function report_fields(): array
+    {
+        return [
+            'artists' => ['name'],
+            'collection' => ['title', 'artist_name'],
+            'imagemetas' => ['title'],
+        ];
+    }
+
+    public function reports(): array
+    {
+        return [
             'artists' => \music\report\artists::class,
             'collection' => \music\report\collection::class,
             'downloads' => \music\report\downloads::class,
             'imagemetas' => \music\report\imagemetas::class,
         ];
+    }
 
-        $this->sequence = (object) [
-            'secret' => 'zYuDd1mlcYByTDJixZXPDC1MMcO3RklrejRhO55dVQw=',
-            'max' => 100000000,
-            'collisions' => [],
-            'subs' => [],
-        ];
+    public function respect_newline_fields(): array
+    {
+        return [];
+    }
 
-        $this->tables = [
+    public function sequence(): Sequence
+    {
+        return $this->sequence;
+    }
+
+    public function tables(): array
+    {
+        return [
             'image' => (object) [
                 'extension' => 'jpg',
                 'type' => 'image/jpeg',
                 'format' => 'binary',
             ],
-        ];
-
-        $this->report_fields = [
-            'artists' => ['name'],
-            'collection' => ['title', 'artist_name'],
-            'imagemetas' => ['title'],
         ];
     }
 }

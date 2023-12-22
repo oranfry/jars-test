@@ -1,6 +1,6 @@
 <?php
 
-use jars\Jars;
+use jars\contract\JarsConnector;
 
 function check_album_artists($expected)
 {
@@ -8,7 +8,7 @@ function check_album_artists($expected)
 
     info(__METHOD__);
 
-    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
     $collection = $jars->group('collection');
@@ -110,7 +110,7 @@ function check_album_reports($expected)
 
     info(__METHOD__);
 
-    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
     $groups = $jars->groups('collection');
@@ -224,7 +224,7 @@ function check_artist_reports($expected)
 
     info(__METHOD__);
 
-    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
     $groups = $jars->groups('artists');
@@ -292,7 +292,7 @@ function do_change_and_test($change, $test)
 
 function do_test($name, $data)
 {
-    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
     info('Refreshed to version ' . $jars->refresh());
 
@@ -347,7 +347,7 @@ function message(string $symbol, string $message, string $color)
 
 function save_expect(array $data, callable $output_callback = null, callable $error_callback = null)
 {
-    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
     $output = $jars->save($data);
@@ -366,7 +366,7 @@ function save_expect(array $data, callable $output_callback = null, callable $er
 
 function preview_expect(array $data, callable $output_callback = null, callable $error_callback = null)
 {
-    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
     $output = $jars->preview($data);
@@ -375,7 +375,10 @@ function preview_expect(array $data, callable $output_callback = null, callable 
         $output_callback($output, $data);
     }
 
-    $jars->filesystem()->persist()->reset(); // give enough rope...
+    $jars
+        ->filesystem()
+        ->persist()
+        ->reset();
 
     unset($jars);
 }
@@ -393,8 +396,9 @@ function strip_non_scalars(array $objectArray)
 
 function replay()
 {
+    echo 'Replay...' . "\n";
     $master = DB_HOME . '/master.dat';
-    $master_backup = tempnam('/tmp', 'music-master-');
+    $master_backup = tempnam('/var/tmp', 'music-master-');
 
     info('Replaying & Refreshing');
 
@@ -403,23 +407,40 @@ function replay()
         "rm -rf '" . DB_HOME . "'",
         "mkdir -p '" . DB_HOME . "'",
         "touch '" . $master . "'",
-        "cat '" . $master_backup . "' | '" . BIN_HOME . "/jars' '--portal-home=" . PORTAL_HOME . "' '--db-home=" . DB_HOME . "' import -u " . USERNAME . " -p " . PASSWORD,
+        "cat '" . $master_backup . "' | '" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD . ' import',
         "rm '" . $master_backup . "'",
     ];
 
-    $output = shell_exec(implode('; ', $cmds));
+    foreach ($cmds as $cmd) {
+        $output = shell_exec($cmd);
 
-    foreach (explode("\n", $output) as $line) {
-        fineprint($line);
+        foreach (explode("\n", $output ?? '') as $line) {
+            fineprint($line);
+        }
     }
 
-    $jars = Jars::of(PORTAL_HOME, DB_HOME);
+    // $output = shell_exec(implode('; ', $cmds));
+
+    // foreach (explode("\n", $output) as $line) {
+    //     fineprint($line);
+    // }
+
+    $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
     info('Refreshed to version ' . $jars->refresh());
-    $jars->filesystem()->persist()->reset();
+
+    $jars
+        ->filesystem()
+        ->persist()
+        ->reset();
 
     unset($jars);
+}
+
+function fresh_jars()
+{
+    return JarsConnector::connect(CONNECTION_STRING);
 }
 
 class TestFailedException extends Exception {}
