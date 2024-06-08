@@ -4,6 +4,7 @@ do_change('010-token'); // creates a token, but it is not actually used during t
 
 do_change_and_test('020-artists-and-albums', 'check-albums-and-artists');
 do_change_and_test('021-more-artists-and-albums', 'check-albums-and-artists');
+do_change_and_test('022-concurrent-modification', 'check-albums-and-artists');
 do_change_and_test('030-delete', 'check-albums-and-artists');
 do_change_and_test('040-add-tracks', 'check-album-tracks');
 do_change_and_test('050-images', 'verify-images');
