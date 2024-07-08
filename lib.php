@@ -239,7 +239,7 @@ function check_album_records($expected)
 
     info(__METHOD__);
 
-    $records_path = DB_HOME . '/current/records/album';
+    $records_path = DB_HOME . '/current/records/album_r';
 
     if (!is_dir($records_path)) {
         throw new TestFailedException('records_path not found: [' . $records_path . ']');
@@ -349,7 +349,7 @@ function check_artist_records($expected)
 
     info(__METHOD__);
 
-    $records_path = DB_HOME . '/current/records/artist';
+    $records_path = DB_HOME . '/current/records/artist_r';
 
     if (!is_dir($records_path)) {
         throw new TestFailedException('records_path not found: [' . $records_path . ']');

@@ -10,7 +10,7 @@ class download extends \jars\Linetype
     {
         parent::__construct();
 
-        $this->table = 'download';
+        $this->table = 'download_r';
 
         $this->simple_string('url');
     }

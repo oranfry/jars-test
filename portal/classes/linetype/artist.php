@@ -10,7 +10,7 @@ class artist extends \jars\Linetype
     {
         parent::__construct();
 
-        $this->table = 'artist';
+        $this->table = 'artist_r';
 
         $this->simple_string('name');
 

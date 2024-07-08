@@ -23,7 +23,6 @@ foreach ($collection_download_urls as $album_title => $album_download_urls) {
     }
 }
 
-
 $data = array_merge(...array_map(function ($album_title) use ($collection, $collection_download_urls, $downloads) {
     $album = Obex::find($collection, 'title', 'is', $album_title);
     $album_download_urls = $collection_download_urls[$album_title];

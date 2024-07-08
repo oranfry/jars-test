@@ -17,7 +17,7 @@ class album extends \jars\Linetype
     {
         parent::__construct();
 
-        $this->table = 'album';
+        $this->table = 'album_r';
 
         $this->simple_string('title');
         $this->simple_string('comment');

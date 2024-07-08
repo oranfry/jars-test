@@ -1,11 +1,12 @@
 <?php
 
-global $ids, $version;
+global $ids, $token, $version;
 
 $original_version = $version;
 
 $lorde_long_real_name = 'Ella Marija Lani Yelich-O\'Connor';
 $lorde_short_real_name = 'Ella O\'Connor';
+$benee_real_name = 'Stella Rose Bennett';
 
 $data = [
     (object) [
@@ -41,7 +42,6 @@ save_expect($data, function ($output, $original) use (&$ids, $lorde_long_real_na
     logger("Name is [$lorde_long_real_name], as expected");
 });
 
-$actual_version = $version;
 $version = $original_version;
 
 change("Change Lorde's name to her short real name [$lorde_short_real_name] with base version $version");
@@ -62,9 +62,19 @@ if (!isset($cme)) {
 
 logger('Caught a ConcurrentModificationException, as expected');
 
-// Change back
+change("Change Benee's name to her real name [$benee_real_name] with base version $version");
 
-$version = $actual_version;
+save_expect([
+    (object) [
+        'id' => $ids['artist']['Benee'],
+        'type' => 'artist',
+        'name' => $benee_real_name,
+    ],
+]);
+
+logger('No ConcurrentModificationException, as expected');
+
+// Change back
 
 $data = [
     (object) [
@@ -72,9 +82,14 @@ $data = [
         'type' => 'artist',
         'name' => 'Lorde',
     ],
+    (object) [
+        'id' => $ids['artist']['Benee'],
+        'type' => 'artist',
+        'name' => 'Benee',
+    ],
 ];
 
-change("Change Lorde's name back to her stage name [Lorde] with base version $version");
+change("Change Lorde and Benee's names back to their stage names with base version $version");
 
 save_expect($data, function ($output, $original) use (&$ids, $lorde_long_real_name) {
     if (!is_array($output)) {

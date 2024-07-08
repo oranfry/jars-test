@@ -10,7 +10,7 @@ class track extends \jars\Linetype
     {
         parent::__construct();
 
-        $this->table = 'track';
+        $this->table = 'track_r';
 
         $this->simple_int('number');
         $this->simple_string('title');

@@ -31,7 +31,7 @@ foreach ($album_covers as $album_title) {
         throw new TestFailedException('Cover image meta could not be retreived for album [' . $album_title . ']');
     }
 
-    if ($meta->title !== $expected_meta_title = 'Album - Cover - ' . $album_title) {
+    if ($meta->title !== $expected_meta_title = 'Album_r - Cover - ' . $album_title) {
         throw new TestFailedException('Cover meta title does not match expected for album [' . $album_title . ']: got [' . $meta->title . '], expected [' . $expected_meta_title . ']');
     }
 
