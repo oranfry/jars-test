@@ -10,7 +10,7 @@ class JarsConfig implements \jars\contract\Config
 
     function __construct()
     {
-        $this->sequence = new Sequence('zYuDd1mlcYByTDJixZXPDC1MMcO3RklrejRhO55dVQw=', 100000000);
+        // do nothing
     }
 
     public function credentialsCorrect(string $username, string $password): bool
@@ -80,7 +80,7 @@ class JarsConfig implements \jars\contract\Config
 
     public function sequence(): Sequence
     {
-        return $this->sequence;
+        return $this->sequence ??= new Sequence('zYuDd1mlcYByTDJixZXPDC1MMcO3RklrejRhO55dVQw=');
     }
 
     public function tables(): array
