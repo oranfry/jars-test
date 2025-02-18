@@ -138,7 +138,6 @@ function strip_non_scalars(array $objectArray)
 
 function replay()
 {
-    echo 'Replay...' . "\n";
     $master = DB_HOME . '/master.dat';
     $master_backup = '/tmp/music-master-' . getmypid();
 
