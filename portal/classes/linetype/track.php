@@ -16,8 +16,8 @@ class track extends \jars\Linetype
         $this->simple_string('title');
 
         $this->borrow = [
-            'download_url' => fn ($line) => $line->download->url ?? null,
-            'download_id' => fn ($line) : ?string => @$line->download->id,
+            'download_url' => fn ($line): ?string => $line->download->url ?? null,
+            'download_id' => fn ($line): ?string => $line->download->id ?? null,
         ];
 
         $this->inlinelinks = [
