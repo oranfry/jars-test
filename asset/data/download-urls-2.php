@@ -2,6 +2,6 @@
 
 return [
     'dont smile at me' => [
-        'Idontwannabeyouanymore' => 'https://emerg.co.nz',
+        'Idontwannabeyouanymore' => 'https://example.net/billie/dont-smile-at-me/idontwannabeyouanymore',
     ],
 ];

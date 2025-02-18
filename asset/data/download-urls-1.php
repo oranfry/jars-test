@@ -2,10 +2,10 @@
 
 return [
     'dont smile at me' => [
-        'My Boy' => 'https://emerg.co',
-        'Idontwannabeyouanymore' => 'https://emerg.co',
+        'My Boy' => 'https://example.com/dont-smile-at-me/my-boy',
+        'Idontwannabeyouanymore' => 'https://example.com/dont-smile-at-me/idontwannabeyouanymore',
     ],
     'Immunity' => [
-        'Closer to You' => 'https://emerg.co',
+        'Closer to You' => 'https://example.com/immunity/closer-to-you',
     ],
 ];
