@@ -153,8 +153,9 @@ function replay()
     ];
 
     foreach ($cmds as $cmd) {
-        fineprint('Running command: ' . $cmd);
+        $output = null;
 
+        fineprint('Running command: ' . $cmd);
         exec($cmd, $output, $code);
 
         foreach ($output as $line) {
