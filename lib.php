@@ -166,18 +166,6 @@ function replay()
             die('Error executing a replay command');
         }
     }
-
-    $jars = fresh_jars();
-    $jars->login(USERNAME, PASSWORD, true);
-
-    info('Refreshed to version ' . $jars->refresh());
-
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
-
-    unset($jars);
 }
 
 function fresh_jars()
