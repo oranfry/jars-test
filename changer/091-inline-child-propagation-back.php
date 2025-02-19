@@ -41,10 +41,10 @@ shuffle($data);
 $expect_callback = function ($output, $original) {
     foreach ($output as $i => $download) {
         if ($download->url !== $original[$i]->url) {
-            throw new TestFailedException('Track [' . @$download->id . '] came back with unexpected url [' . @$download->url . '], expected [' . $original[$i]->url . ']');
+            throw new TestFailedException('Download [' . @$download->id . '] came back with unexpected url [' . @$download->url . '], expected [' . $original[$i]->url . ']');
         }
 
-        logger('Track [' . @$download->id . '] came back with correct url [' . @$download->url . ']');
+        logger('Download [' . @$download->id . '] came back with correct url [' . @$download->url . ']');
     }
 
     logger('Download URL correct');
