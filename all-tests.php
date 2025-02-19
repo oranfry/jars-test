@@ -15,3 +15,8 @@ do_change_and_test('080-timestamps-a', 'check-release-dates');
 do_change_and_test('081-timestamps-b', 'check-release-dates');
 do_change_and_test('090-inline-child-propagation-forward', 'check-downloads');
 do_change_and_test('091-inline-child-propagation-back', 'check-downloads');
+do_change_and_test('092-inline-child-propagation-forward-delete', 'check-downloads');
+do_change_and_test('093-inline-child-propagation-back-delete-a', 'check-downloads');
+do_change_and_test('094-inline-child-propagation-back-delete-b', 'check-downloads');
+do_change_and_test('095-mutual-inline-child-a', 'check-downloads');
+do_change_and_test('096-mutual-inline-child-b', 'check-downloads');
