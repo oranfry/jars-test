@@ -13,7 +13,7 @@ class JarsConfig implements \jars\contract\Config
         // do nothing
     }
 
-    public function credentialsCorrect(string $username, string $password): bool
+    public function credentialsCorrect(?string $username = null, ?string $password = null): bool
     {
         if ($username !== 'music') {
             return false;
