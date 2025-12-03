@@ -84,7 +84,7 @@ function message(string $symbol, string $message, string $color)
     }
 }
 
-function save_expect(array $data, callable $output_callback = null, callable $error_callback = null)
+function save_expect(array $data, ?callable $output_callback = null, ?callable $error_callback = null)
 {
     global $version;
 
@@ -106,7 +106,7 @@ function save_expect(array $data, callable $output_callback = null, callable $er
     }
 }
 
-function preview_expect(array $data, callable $output_callback = null, callable $error_callback = null)
+function preview_expect(array $data, ?callable $output_callback = null, ?callable $error_callback = null)
 {
     $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
