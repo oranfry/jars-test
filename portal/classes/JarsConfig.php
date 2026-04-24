@@ -2,9 +2,9 @@
 
 namespace music;
 
-use jars\Sequence as Sequence;
+use \OranFry\Jars\Sequence as Sequence;
 
-class JarsConfig implements \jars\contract\Config
+class JarsConfig implements \OranFry\Jars\Contract\Config
 {
     private Sequence $sequence;
 
@@ -49,7 +49,7 @@ class JarsConfig implements \jars\contract\Config
             'imagemeta' => \music\linetype\imagemeta::class,
             'imagemetaplain' => \music\linetype\imagemetaplain::class,
             'imageplain' => \hasimages\linetype\imageplain::class,
-            'token' => \jars\linetype\token::class,
+            'token' => \OranFry\Jars\Core\Linetypes\token::class,
             'track' => \music\linetype\track::class,
         ];
     }

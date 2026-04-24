@@ -17,7 +17,14 @@ require __DIR__ . '/portal/vendor/autoload.php';
 
 require TEST_HOME . '/lib.php';
 
-shell_exec('rm -rf "' . DB_HOME . '"; mkdir "' . DB_HOME . '"');
+shell_exec(implode('; ', [
+    'rm -rf "' . DB_HOME . '"',
+    'mkdir "' . DB_HOME . '"',
+    'mkdir "' . DB_HOME . '/master"',
+    'mkdir "' . DB_HOME . '/chain"',
+    'mkdir "' . DB_HOME . '/index"',
+    'mkdir "' . DB_HOME . '/reports"',
+]));
 
 try {
     require __DIR__ . '/all-tests.php';

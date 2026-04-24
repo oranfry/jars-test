@@ -2,7 +2,7 @@
 
 namespace music\report;
 
-class downloads extends \jars\Report
+class downloads extends \OranFry\Jars\Core\Report
 {
     public function __construct()
     {

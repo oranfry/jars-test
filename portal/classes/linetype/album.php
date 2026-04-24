@@ -4,7 +4,7 @@ namespace music\linetype;
 
 use DateTime;
 
-class album extends \jars\Linetype
+class album extends \OranFry\Jars\Core\Linetype
 {
     use \simplefields\traits\SimpleFields;
     use traight\hasimages;
@@ -58,13 +58,13 @@ class album extends \jars\Linetype
         }
     }
 
-    public function unpack($line, $oldline, $old_inlines)
+    public function unpack($line, $oldline)
     {
-        parent::unpack($line, $oldline, $old_inlines);
+        parent::unpack($line, $oldline);
 
         $line->artist = 'unchanged';
         $line->comment = $line->title;
 
-        $this->music_hasimages_unpack($line, $oldline, $old_inlines);
+        $this->music_hasimages_unpack($line, $oldline);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
-use jars\contract\JarsConnector;
+use OranFry\Jars\Contract\JarsConnector;
+use OranFry\Jars\Core\Jars;
 
 class TestFailedException extends Exception {}
 class CouldNotTestException extends Exception {}
@@ -24,7 +25,8 @@ function do_change($change)
 
 function do_change_and_test($change, $test)
 {
-    do_test($test, $data = do_change($change));
+    $data = do_change($change);
+    do_test($test, $data);
     replay();
     do_test($test, $data);
 }
@@ -35,10 +37,10 @@ function do_test($name, $data)
     $jars->login(USERNAME, PASSWORD, true);
     info('Refreshed to version ' . $jars->refresh());
 
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
+    // $jars
+    //     ->filesystem()
+    //     ->persist()
+    //     ->reset();
 
     unset($jars);
 
@@ -91,13 +93,18 @@ function save_expect(array $data, ?callable $output_callback = null, ?callable $
     $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
-    $output = $jars->save($data, $version ?? null);
-    $version = $jars->version();
+    // if (VERBOSE) {
+    //     error_log('saving...');
+    //     var_dump($data);
+    // }
 
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
+    $output = $jars->save($data, $version ?? null);
+
+    if (VERBOSE) {
+        echo json_encode($output) . "\n\n";
+    }
+
+    $version = $output[0]->version;
 
     unset($jars);
 
@@ -138,18 +145,38 @@ function strip_non_scalars(array $objectArray)
 
 function replay()
 {
-    $master = DB_HOME . '/master.dat';
+    $master = DB_HOME . '/master';
     $master_backup = '/tmp/music-master-' . getmypid();
 
     info('Replaying & Refreshing');
 
+    $initialVersion = Jars::INITIAL_VERSION;
+
+    $jarsCmd = "'" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD;
+
     $cmds = [
-        "mv '" . $master . "' '" . $master_backup . "'",
-        "rm -rf '" . DB_HOME . "'",
-        "mkdir -p '" . DB_HOME . "'",
-        "touch '" . $master . "'",
-        "cat '" . $master_backup . "' | '" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD . ' import',
-        "rm '" . $master_backup . "'",
+        "rm -rf '" . DB_HOME . ".bak'",
+        // "mv '" . $master . "' '" . $master_backup . "'",
+        "mv '" . DB_HOME . "' '" . DB_HOME . ".bak'",
+        // "rm -rf '" . DB_HOME . "'",
+        "mkdir '" . DB_HOME . "'",
+        "mkdir '" . DB_HOME . "/chain'",
+        "mkdir '" . DB_HOME . "/index'",
+        "mkdir '" . DB_HOME . "/reports'",
+        "mkdir '" . DB_HOME . "/master'",
+        implode("\n", [
+            'source_version=' . $initialVersion,
+            'while true; do',
+            '    file="' . DB_HOME . '.bak/master/${source_version:0:2}/${source_version:2:2}/$source_version"',
+            '    if [ ! -e "$file" ]; then break; fi',
+            '    source_version="$(head -c 64 "$file")"',
+            '    destination_version="$(' . $jarsCmd . ' head)"',
+            '    echo source_version: $source_version, destination_version: $destination_version',
+            // '    cat "$file"',
+            '    cat "$file" | ' . $jarsCmd . ' import $destination_version',
+            'done',
+        ]),
+        // "rm -rf '" . $master_backup . "'",
     ];
 
     foreach ($cmds as $cmd) {
@@ -166,6 +193,12 @@ function replay()
             die('Error executing a replay command');
         }
     }
+
+    global $version;
+
+    $version = fresh_jars()->head();
+
+    // die("replayed\n");
 }
 
 function fresh_jars()
@@ -197,6 +230,7 @@ function check_artist_reports($expected)
     logger('Group is called [], as expected');
 
     $artists = $jars->group('artists');
+    $found = [];
 
     foreach ($artists as $artist) {
         if (null === $pos = array_search(@$artist->name, $expected)) {
@@ -204,6 +238,8 @@ function check_artist_reports($expected)
         }
 
         logger('Expected artist [' . @$artist->name . '] found');
+
+        $found[] = $expected[$pos];
 
         unset($expected[$pos]);
 
@@ -215,7 +251,7 @@ function check_artist_reports($expected)
     }
 
     if (count($expected)) {
-        throw new TestFailedException('Not all expected artists were found, missing [' . implode(', ', $expected) . ']');
+        throw new TestFailedException('Not all expected artists were found, found [' . implode(', ', $found) . '], missing [' . implode(', ', $expected) . ']');
     }
 
     logger('All expected artists found, and no unexpected ones');

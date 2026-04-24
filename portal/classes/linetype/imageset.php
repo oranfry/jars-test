@@ -17,9 +17,9 @@ class imageset extends \hasimages\linetype\imageset
         }
     }
 
-    public function unpack($line, $oldline, $old_inlines)
+    public function unpack($line, $oldline)
     {
-        parent::unpack($line, $oldline, $old_inlines);
+        parent::unpack($line, $oldline);
 
         foreach ($this->image_sizes as $image => $details) {
             if (is_object($child = @$line->{"{$image}_image"}) && $val = (int) @$line->{"{$image}_image_external_id"}) {
