@@ -115,21 +115,18 @@ function save_expect(array $data, ?callable $output_callback = null, ?callable $
 
 function preview_expect(array $data, ?callable $output_callback = null, ?callable $error_callback = null)
 {
+    global $version;
+
     $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
-    $output = $jars->preview($data);
+    $output = $jars->preview($data, $version ?? null);
+
+    unset($jars);
 
     if ($output_callback) {
         $output_callback($output, $data);
     }
-
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
-
-    unset($jars);
 }
 
 function strip_non_scalars(array $objectArray)
