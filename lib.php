@@ -148,14 +148,11 @@ function replay()
     info('Replaying & Refreshing');
 
     $initialVersion = Jars::INITIAL_VERSION;
-
     $jarsCmd = "'" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD;
 
     $cmds = [
         "rm -rf '" . DB_HOME . ".bak'",
-        // "mv '" . $master . "' '" . $master_backup . "'",
         "mv '" . DB_HOME . "' '" . DB_HOME . ".bak'",
-        // "rm -rf '" . DB_HOME . "'",
         "mkdir '" . DB_HOME . "'",
         "mkdir '" . DB_HOME . "/chain'",
         "mkdir '" . DB_HOME . "/index'",
@@ -166,14 +163,12 @@ function replay()
             'while true; do',
             '    file="' . DB_HOME . '.bak/master/${source_version:0:2}/${source_version:2:2}/$source_version"',
             '    if [ ! -e "$file" ]; then break; fi',
+            '    base_version=$source_version',
             '    source_version="$(head -c 64 "$file")"',
-            '    destination_version="$(' . $jarsCmd . ' head)"',
-            '    echo source_version: $source_version, destination_version: $destination_version',
-            // '    cat "$file"',
-            '    cat "$file" | ' . $jarsCmd . ' import $destination_version',
+            '    echo source_version: $source_version, base_version: $base_version',
+            '    cat "$file" | ' . $jarsCmd . ' import $base_version',
             'done',
         ]),
-        // "rm -rf '" . $master_backup . "'",
     ];
 
     foreach ($cmds as $cmd) {
