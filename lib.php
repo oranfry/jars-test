@@ -8,7 +8,7 @@ class CouldNotTestException extends Exception {}
 
 function do_change($change)
 {
-    if (VERBOSE) {
+    if (JARS_TEST_VERBOSE) {
         echo "\033[37m";
         echo "\n\n" . ' Running change [' . $change . ']' . "\n\n";
         echo "\033[39m";
@@ -44,7 +44,7 @@ function do_test($name, $data)
 
     unset($jars);
 
-    if (VERBOSE) {
+    if (JARS_TEST_VERBOSE) {
         echo "\033[37m";
         echo "\n\n" . ' Running test [' . $name . ']' . "\n\n";
         echo "\033[39m";
@@ -79,7 +79,7 @@ function logger($message) {
 
 function message(string $symbol, string $message, string $color)
 {
-    if (VERBOSE) {
+    if (JARS_TEST_VERBOSE) {
         echo $color;
         echo '  ' . $symbol . ' ' . $message . "\n";
         echo "\033[39m";
@@ -93,15 +93,28 @@ function save_expect(array $data, ?callable $output_callback = null, ?callable $
     $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
-    // if (VERBOSE) {
-    //     error_log('saving...');
-    //     var_dump($data);
-    // }
+    if (JARS_TEST_VERBOSE) {
+        $json = json_encode($data, JSON_UNESCAPED_SLASHES);
+
+        if (strlen($json) < JARS_TEST_OUTPUT_THRESHOLD) {
+            fineprint('Sending to jars:');
+            fineprint($json);
+        } else {
+            fineprint('Sending to jars: [hidden for brevity]');
+        }
+    }
 
     $output = $jars->save($data, $version ?? null);
 
-    if (VERBOSE) {
-        echo json_encode($output) . "\n\n";
+    if (JARS_TEST_VERBOSE) {
+        $json = json_encode($output, JSON_UNESCAPED_SLASHES);
+
+        if (strlen($json) < JARS_TEST_OUTPUT_THRESHOLD) {
+            fineprint('Got back from jars:');
+            fineprint($json);
+        } else {
+            fineprint('Got back from jars: [hidden for brevity]');
+        }
     }
 
     $version = $output[0]->version;
@@ -120,7 +133,29 @@ function preview_expect(array $data, ?callable $output_callback = null, ?callabl
     $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
+    if (JARS_TEST_VERBOSE) {
+        $json = json_encode($data, JSON_UNESCAPED_SLASHES);
+
+        if (strlen($json) < JARS_TEST_OUTPUT_THRESHOLD) {
+            fineprint('Sending to jars:');
+            fineprint($json);
+        } else {
+            fineprint('Sending to jars: [hidden for brevity]');
+        }
+    }
+
     $output = $jars->preview($data, $version ?? null);
+
+    if (JARS_TEST_VERBOSE) {
+        $json = json_encode($output, JSON_UNESCAPED_SLASHES);
+
+        if (strlen($json) < JARS_TEST_OUTPUT_THRESHOLD) {
+            fineprint('Got back from jars:');
+            fineprint($json);
+        } else {
+            fineprint('Got back from jars: [hidden for brevity]');
+        }
+    }
 
     unset($jars);
 
