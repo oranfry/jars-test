@@ -49,6 +49,4 @@ try {
     die(1);
 }
 
-echo "\n";
 logger('ALL TESTS PASSED');
-echo "\n";

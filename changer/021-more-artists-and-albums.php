@@ -46,41 +46,7 @@ foreach ($data as $line) {
     }
 }
 
-save_expect($data, function ($output, $original) use (&$ids) {
-    if (!is_array($output)) {
-        throw new TestFailedException('Output expected to be an array');
-    }
-
-    logger('Got array, as expected');
-
-    $expected = count($original);
-
-    if (count($output) != $expected) {
-        throw new TestFailedException('Got [' . count($output) . '] elements in output, expected [' . $expected . ']');
-    }
-
-    logger('Array had ['. $expected . '] elements, as expected');
-
-    foreach ($output as $item) {
-        switch ($item->type) {
-            case 'album':
-                $ids['album'][$item->title] = $item->id;
-                break;
-
-            case 'artist':
-                $ids['artist'][$item->name] = $item->id;
-
-                foreach (@$item->albums ?: [] as $album) {
-                    $ids['album'][$album->title] = $album->id;
-                }
-
-                break;
-
-            default:
-                throw new TestFailedException('Unexpected item type [' . @$item->type . ']');
-        }
-    }
-});
+save_expect_albums_artists($data, $ids);
 
 return [
     'album_artists' => require TEST_HOME . '/asset/data/album-artists-2.php',

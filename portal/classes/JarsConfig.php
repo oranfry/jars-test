@@ -2,12 +2,8 @@
 
 namespace music;
 
-use \OranFry\Jars\Sequence as Sequence;
-
 class JarsConfig implements \OranFry\Jars\Contract\Config
 {
-    private Sequence $sequence;
-
     function __construct()
     {
         // do nothing
@@ -15,6 +11,10 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
 
     public function credentialsCorrect(?string $username = null, ?string $password = null): bool
     {
+        if (php_sapi_name() === 'cli') {
+            return true;
+        }
+
         if ($username !== 'music') {
             return false;
         }
@@ -76,11 +76,6 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
     public function respect_newline_fields(): array
     {
         return [];
-    }
-
-    public function sequence(): Sequence
-    {
-        return $this->sequence ??= new Sequence('zYuDd1mlcYByTDJixZXPDC1MMcO3RklrejRhO55dVQw=');
     }
 
     public function tables(): array
