@@ -2,7 +2,7 @@
 
 namespace music\linetype;
 
-class artist extends \jars\Linetype
+class artist extends \OranFry\Jars\Core\Linetype
 {
     use \simplefields\traits\SimpleFields;
 

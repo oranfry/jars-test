@@ -2,12 +2,8 @@
 
 namespace music;
 
-use jars\Sequence as Sequence;
-
-class JarsConfig implements \jars\contract\Config
+class JarsConfig implements \OranFry\Jars\Contract\Config
 {
-    private Sequence $sequence;
-
     function __construct()
     {
         // do nothing
@@ -15,6 +11,10 @@ class JarsConfig implements \jars\contract\Config
 
     public function credentialsCorrect(?string $username = null, ?string $password = null): bool
     {
+        if (php_sapi_name() === 'cli') {
+            return true;
+        }
+
         if ($username !== 'music') {
             return false;
         }
@@ -49,7 +49,7 @@ class JarsConfig implements \jars\contract\Config
             'imagemeta' => \music\linetype\imagemeta::class,
             'imagemetaplain' => \music\linetype\imagemetaplain::class,
             'imageplain' => \hasimages\linetype\imageplain::class,
-            'token' => \jars\linetype\token::class,
+            'token' => \OranFry\Jars\Core\Linetypes\token::class,
             'track' => \music\linetype\track::class,
         ];
     }
@@ -76,11 +76,6 @@ class JarsConfig implements \jars\contract\Config
     public function respect_newline_fields(): array
     {
         return [];
-    }
-
-    public function sequence(): Sequence
-    {
-        return $this->sequence ??= new Sequence('zYuDd1mlcYByTDJixZXPDC1MMcO3RklrejRhO55dVQw=');
     }
 
     public function tables(): array

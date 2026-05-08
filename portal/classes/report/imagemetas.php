@@ -2,7 +2,7 @@
 
 namespace music\report;
 
-class imagemetas extends \jars\Report
+class imagemetas extends \OranFry\Jars\Core\Report
 {
     public function __construct()
     {

@@ -2,7 +2,7 @@
 
 namespace music\linetype;
 
-class download extends \jars\Linetype
+class download extends \OranFry\Jars\Core\Linetype
 {
     use \simplefields\traits\SimpleFields;
 
@@ -25,9 +25,9 @@ class download extends \jars\Linetype
         ];
     }
 
-    public function unpack($line, $oldline, $old_inlines)
+    public function unpack($line, $oldline)
     {
-        parent::unpack($line, $oldline, $old_inlines);
+        parent::unpack($line, $oldline);
 
         $line->track = 'unchanged';
     }

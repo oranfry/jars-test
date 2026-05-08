@@ -1,13 +1,14 @@
 <?php
 
-use jars\contract\JarsConnector;
+use OranFry\Jars\Contract\JarsConnector;
+use OranFry\Jars\Core\Jars;
 
 class TestFailedException extends Exception {}
 class CouldNotTestException extends Exception {}
 
 function do_change($change)
 {
-    if (VERBOSE) {
+    if (JARS_TEST_VERBOSE) {
         echo "\033[37m";
         echo "\n\n" . ' Running change [' . $change . ']' . "\n\n";
         echo "\033[39m";
@@ -24,7 +25,8 @@ function do_change($change)
 
 function do_change_and_test($change, $test)
 {
-    do_test($test, $data = do_change($change));
+    $data = do_change($change);
+    do_test($test, $data);
     replay();
     do_test($test, $data);
 }
@@ -35,14 +37,14 @@ function do_test($name, $data)
     $jars->login(USERNAME, PASSWORD, true);
     info('Refreshed to version ' . $jars->refresh());
 
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
+    // $jars
+    //     ->filesystem()
+    //     ->persist()
+    //     ->reset();
 
     unset($jars);
 
-    if (VERBOSE) {
+    if (JARS_TEST_VERBOSE) {
         echo "\033[37m";
         echo "\n\n" . ' Running test [' . $name . ']' . "\n\n";
         echo "\033[39m";
@@ -64,7 +66,9 @@ function change($message) {
 }
 
 function fineprint($message) {
-    message(' ', $message, "\033[90m");
+    if (JARS_TEST_VERBOSE >= 2) {
+        message(' ', $message, "\033[90m");
+    }
 }
 
 function info($message) {
@@ -77,9 +81,16 @@ function logger($message) {
 
 function message(string $symbol, string $message, string $color)
 {
-    if (VERBOSE) {
+    if (JARS_TEST_VERBOSE) {
+        $lines = explode("\n", $message);
+
         echo $color;
-        echo '  ' . $symbol . ' ' . $message . "\n";
+        echo '  ' . $symbol . ' ' . array_shift($lines) . "\n";
+
+        foreach ($lines as $line) {
+            echo '    ' . $line . "\n";
+        }
+
         echo "\033[39m";
     }
 }
@@ -91,38 +102,75 @@ function save_expect(array $data, ?callable $output_callback = null, ?callable $
     $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
-    $output = $jars->save($data, $version ?? null);
-    $version = $jars->version();
+    if (JARS_TEST_VERBOSE >= 3) {
+        $json = json_encode($data, JSON_UNESCAPED_SLASHES);
 
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
+        if (strlen($json) < JARS_TEST_OUTPUT_THRESHOLD) {
+            fineprint('Sending to jars:');
+            fineprint($json);
+        } else {
+            fineprint('Sending to jars: [hidden for brevity]');
+        }
+    }
+
+    $output = $jars->save($data, $version ?? null);
+
+    if (JARS_TEST_VERBOSE >= 3) {
+        $json = json_encode($output, JSON_UNESCAPED_SLASHES);
+
+        if (strlen($json) < JARS_TEST_OUTPUT_THRESHOLD) {
+            fineprint('Got back from jars:');
+            fineprint($json);
+        } else {
+            fineprint('Got back from jars: [hidden for brevity]');
+        }
+    }
+
+    $version = $output[0]->version;
 
     unset($jars);
 
     if ($output_callback) {
-        $output_callback($output, $data);
+        return $output_callback($output, $data);
     }
 }
 
 function preview_expect(array $data, ?callable $output_callback = null, ?callable $error_callback = null)
 {
+    global $version;
+
     $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
-    $output = $jars->preview($data);
+    if (JARS_TEST_VERBOSE >= 3) {
+        $json = json_encode($data, JSON_UNESCAPED_SLASHES);
+
+        if (strlen($json) < JARS_TEST_OUTPUT_THRESHOLD) {
+            fineprint('Sending to jars:');
+            fineprint($json);
+        } else {
+            fineprint('Sending to jars: [hidden for brevity]');
+        }
+    }
+
+    $output = $jars->preview($data, $version ?? null);
+
+    if (JARS_TEST_VERBOSE >= 3) {
+        $json = json_encode($output, JSON_UNESCAPED_SLASHES);
+
+        if (strlen($json) < JARS_TEST_OUTPUT_THRESHOLD) {
+            fineprint('Got back from jars:');
+            fineprint($json);
+        } else {
+            fineprint('Got back from jars: [hidden for brevity]');
+        }
+    }
+
+    unset($jars);
 
     if ($output_callback) {
         $output_callback($output, $data);
     }
-
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
-
-    unset($jars);
 }
 
 function strip_non_scalars(array $objectArray)
@@ -136,20 +184,40 @@ function strip_non_scalars(array $objectArray)
     }
 }
 
+function jars_cmd()
+{
+    return "'" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD;
+}
+
 function replay()
 {
-    $master = DB_HOME . '/master.dat';
+    $master = DB_HOME . '/master';
     $master_backup = '/tmp/music-master-' . getmypid();
 
     info('Replaying & Refreshing');
 
+    $rootVersion = Jars::ROOT_VERSION;
+    $jarsCmd = "'" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD;
+
     $cmds = [
-        "mv '" . $master . "' '" . $master_backup . "'",
-        "rm -rf '" . DB_HOME . "'",
-        "mkdir -p '" . DB_HOME . "'",
-        "touch '" . $master . "'",
-        "cat '" . $master_backup . "' | '" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD . ' import',
-        "rm '" . $master_backup . "'",
+        "rm -rf '" . DB_HOME . ".bak'",
+        "mv '" . DB_HOME . "' '" . DB_HOME . ".bak'",
+        "mkdir '" . DB_HOME . "'",
+        "mkdir '" . DB_HOME . "/chain'",
+        "mkdir '" . DB_HOME . "/index'",
+        "mkdir '" . DB_HOME . "/reports'",
+        "mkdir '" . DB_HOME . "/master'",
+        implode("\n", [
+            'source_version=' . $rootVersion,
+            'while true; do',
+            '    file="' . DB_HOME . '.bak/master/${source_version:0:2}/${source_version:2:2}/$source_version"',
+            '    if [ ! -e "$file" ]; then break; fi',
+            '    base_version=$source_version',
+            '    source_version="$(head -c 64 "$file")"',
+            '    echo source_version: $source_version, base_version: $base_version',
+            '    cat "$file" | ' . jars_cmd() . ' import $base_version',
+            'done',
+        ]),
     ];
 
     foreach ($cmds as $cmd) {
@@ -166,6 +234,12 @@ function replay()
             die('Error executing a replay command');
         }
     }
+
+    global $version;
+
+    $version = fresh_jars()->head();
+
+    // die("replayed\n");
 }
 
 function fresh_jars()
@@ -197,6 +271,7 @@ function check_artist_reports($expected)
     logger('Group is called [], as expected');
 
     $artists = $jars->group('artists');
+    $found = [];
 
     foreach ($artists as $artist) {
         if (null === $pos = array_search(@$artist->name, $expected)) {
@@ -204,6 +279,8 @@ function check_artist_reports($expected)
         }
 
         logger('Expected artist [' . @$artist->name . '] found');
+
+        $found[] = $expected[$pos];
 
         unset($expected[$pos]);
 
@@ -215,7 +292,7 @@ function check_artist_reports($expected)
     }
 
     if (count($expected)) {
-        throw new TestFailedException('Not all expected artists were found, missing [' . implode(', ', $expected) . ']');
+        throw new TestFailedException('Not all expected artists were found, found [' . implode(', ', $found) . '], missing [' . implode(', ', $expected) . ']');
     }
 
     logger('All expected artists found, and no unexpected ones');
@@ -307,4 +384,47 @@ function check_album_artists($expected)
     }
 
     logger('All expected albums found, and no unexpected ones');
+}
+
+function save_expect_albums_artists(array $data, &$ids = null, &$version = null): object
+{
+    return save_expect($data, function ($output, $original) use (&$ids, &$version) {
+        if (!is_array($output)) {
+            throw new TestFailedException('Output expected to be an array');
+        }
+
+        logger('Got array, as expected');
+
+        $expected = count($original);
+
+        if (count($output) != $expected) {
+            throw new TestFailedException('Got [' . count($output) . '] elements in output, expected [' . $expected . ']');
+        }
+
+        logger('Array had ['. $expected . '] elements, as expected');
+
+        foreach ($output as $item) {
+            switch ($item->type) {
+                case 'album':
+                    $ids['album'][$item->title] = $item->id;
+                    break;
+
+                case 'artist':
+                    $ids['artist'][$item->name] = $item->id;
+
+                    foreach (@$item->albums ?: [] as $album) {
+                        $ids['album'][$album->title] = $album->id;
+                    }
+
+                    break;
+
+                default:
+                    throw new TestFailedException('Unexpected item type [' . @$item->type . ']');
+            }
+        }
+
+        $version = $output ? reset($output)->version : null;
+
+        return (object) compact('output', 'original');
+    });
 }
