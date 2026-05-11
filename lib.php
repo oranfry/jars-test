@@ -1,6 +1,7 @@
 <?php
 
 use OranFry\Jars\Contract\JarsConnector;
+use OranFry\Jars\Contract\Constants;
 use OranFry\Jars\Core\Jars;
 
 class TestFailedException extends Exception {}
@@ -196,7 +197,7 @@ function replay()
 
     info('Replaying & Refreshing');
 
-    $rootVersion = Jars::ROOT_VERSION;
+    $rootVersion = Constants::ROOT_VERSION;
     $jarsCmd = "'" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD;
 
     $cmds = [
