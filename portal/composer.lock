@@ -4,70 +4,76 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78f23e35cfe619993bbb9a3a5837a043",
+    "content-hash": "faa5765f98307d8c23720cfaf9c41d80",
     "packages": [
         {
             "name": "oranfry/hasimages",
-            "version": "dev-master",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oranfry/hasimages.git",
-                "reference": "a84b4e26cffee9648c6e611811ca481712328bdb"
+                "reference": "af7d36ea4f472d3505fb77d6fca119ef839d6e9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/a84b4e26cffee9648c6e611811ca481712328bdb",
-                "reference": "a84b4e26cffee9648c6e611811ca481712328bdb",
+                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/af7d36ea4f472d3505fb77d6fca119ef839d6e9b",
+                "reference": "af7d36ea4f472d3505fb77d6fca119ef839d6e9b",
                 "shasum": ""
             },
-            "default-branch": true,
+            "require": {
+                "ext-gd": "*"
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "hasimages\\": "classes"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "support": {
-                "source": "https://github.com/oranfry/hasimages/tree/master",
-                "issues": "https://github.com/oranfry/hasimages/issues"
+                "issues": "https://github.com/oranfry/hasimages/issues",
+                "source": "https://github.com/oranfry/hasimages/tree/2.0.0"
             },
-            "time": "2023-05-05T23:02:07+00:00"
+            "time": "2026-05-11T22:01:40+00:00"
         },
         {
             "name": "oranfry/simple-fields",
-            "version": "dev-master",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oranfry/simple-fields.git",
-                "reference": "e912014b2fbd3b906050a1ad99bb965d36a9ea1b"
+                "reference": "c9b103d87cb61a9b13ab59c6425d402acbf3e7d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oranfry/simple-fields/zipball/e912014b2fbd3b906050a1ad99bb965d36a9ea1b",
-                "reference": "e912014b2fbd3b906050a1ad99bb965d36a9ea1b",
+                "url": "https://api.github.com/repos/oranfry/simple-fields/zipball/c9b103d87cb61a9b13ab59c6425d402acbf3e7d7",
+                "reference": "c9b103d87cb61a9b13ab59c6425d402acbf3e7d7",
                 "shasum": ""
             },
-            "default-branch": true,
+            "require": {
+                "ext-bcmath": "*"
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "simplefields\\": "classes"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "support": {
-                "source": "https://github.com/oranfry/simple-fields/tree/master",
-                "issues": "https://github.com/oranfry/simple-fields/issues"
+                "issues": "https://github.com/oranfry/simple-fields/issues",
+                "source": "https://github.com/oranfry/simple-fields/tree/3.3.1"
             },
-            "time": "2023-05-04T01:40:46+00:00"
+            "time": "2025-08-02T22:19:22+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
