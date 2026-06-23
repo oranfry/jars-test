@@ -4,7 +4,7 @@ namespace OranFry\Jars\TestPortal\Linetype\Traight;
 
 trait hasimages
 {
-    use \hasimages\linetype\traight\hasimages;
+    use \OranFry\HasImages\Linetype\Traight\hasimages;
 
     protected function music_hasimages_init()
     {

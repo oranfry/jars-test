@@ -7,7 +7,7 @@ use DateTime;
 class album extends \OranFry\Jars\Core\Linetype
 {
     use \simplefields\traits\SimpleFields;
-    use traight\hasimages;
+    use Traight\hasimages;
 
     const IMAGE_SIZES = [
         'cover' => ['size' => [1200, 1200]],
