@@ -1,10 +1,10 @@
 <?php
 
-namespace music\linetype;
+namespace OranFry\Jars\TestPortal\Linetype;
 
 use DateTime;
 
-class album extends \jars\Linetype
+class album extends \OranFry\Jars\Core\Linetype
 {
     use \simplefields\traits\SimpleFields;
     use traight\hasimages;

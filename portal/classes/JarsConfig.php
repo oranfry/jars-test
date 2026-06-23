@@ -1,10 +1,10 @@
 <?php
 
-namespace music;
+namespace OranFry\Jars\TestPortal;
 
-use jars\Sequence as Sequence;
+use OranFry\Jars\Core\Sequence;
 
-class JarsConfig implements \jars\contract\Config
+class JarsConfig implements \OranFry\Jars\Contract\Config
 {
     private Sequence $sequence;
 
@@ -41,16 +41,16 @@ class JarsConfig implements \jars\contract\Config
     public function linetypes(): array
     {
         return [
-            'album' => \music\linetype\album::class,
-            'albumimageset' => \music\linetype\albumimageset::class,
-            'artist' => \music\linetype\artist::class,
-            'download' => \music\linetype\download::class,
+            'album' => Linetype\album::class,
+            'albumimageset' => Linetype\albumimageset::class,
+            'artist' => Linetype\artist::class,
+            'download' => Linetype\download::class,
             'image' => \hasimages\linetype\image::class,
-            'imagemeta' => \music\linetype\imagemeta::class,
-            'imagemetaplain' => \music\linetype\imagemetaplain::class,
+            'imagemeta' => Linetype\imagemeta::class,
+            'imagemetaplain' => Linetype\imagemetaplain::class,
             'imageplain' => \hasimages\linetype\imageplain::class,
-            'token' => \jars\linetype\token::class,
-            'track' => \music\linetype\track::class,
+            'token' => \OranFry\Jars\Core\Linetype\token::class,
+            'track' => Linetype\track::class,
         ];
     }
 
@@ -66,10 +66,10 @@ class JarsConfig implements \jars\contract\Config
     public function reports(): array
     {
         return [
-            'artists' => \music\report\artists::class,
-            'collection' => \music\report\collection::class,
-            'downloads' => \music\report\downloads::class,
-            'imagemetas' => \music\report\imagemetas::class,
+            'artists' => Report\artists::class,
+            'collection' => Report\collection::class,
+            'downloads' => Report\downloads::class,
+            'imagemetas' => Report\imagemetas::class,
         ];
     }
 

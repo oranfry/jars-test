@@ -1,8 +1,8 @@
 <?php
 
-namespace music\linetype;
+namespace OranFry\Jars\TestPortal\Linetype;
 
-class artist extends \jars\Linetype
+class artist extends \OranFry\Jars\Core\Linetype
 {
     use \simplefields\traits\SimpleFields;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace music\linetype;
+namespace OranFry\Jars\TestPortal\Linetype;
 
-class imagemeta extends \hasimages\linetype\imagemeta
+class imagemetaplain extends \hasimages\linetype\imagemetaplain
 {
     use \simplefields\traits\SimpleFields;
 

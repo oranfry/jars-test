@@ -1,6 +1,6 @@
 <?php
 
-namespace music\linetype\traight;
+namespace OranFry\Jars\TestPortal\Linetype\Traight;
 
 trait hasimages
 {

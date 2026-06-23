@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "music\\": "classes"
+            "OranFry\\Jars\\TestPortal\\": "classes"
         }
     },
     "minimum-stability": "dev",

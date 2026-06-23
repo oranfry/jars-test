@@ -1,6 +1,6 @@
 <?php
 
-namespace music\linetype;
+namespace OranFry\Jars\TestPortal\Linetype;
 
 class albumimageset extends imageset
 {

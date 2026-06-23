@@ -54,7 +54,7 @@ try {
             'name' => $lorde_short_real_name,
         ],
     ]);
-} catch (\jars\contract\ConcurrentModificationException $cme) {}
+} catch (\OranFry\Jars\Contract\ConcurrentModificationException $cme) {}
 
 if (!isset($cme)) {
     throw new TestFailedException('Expected ConcurrentModificationException but did not get one');

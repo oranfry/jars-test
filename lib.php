@@ -1,6 +1,6 @@
 <?php
 
-use jars\contract\JarsConnector;
+use OranFry\Jars\Contract\JarsConnector;
 
 class TestFailedException extends Exception {}
 class CouldNotTestException extends Exception {}

@@ -1,8 +1,8 @@
 <?php
 
-namespace music\report;
+namespace OranFry\Jars\TestPortal\Report;
 
-class downloads extends \jars\Report
+class downloads extends \OranFry\Jars\Core\Report
 {
     public function __construct()
     {

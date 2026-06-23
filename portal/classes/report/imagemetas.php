@@ -1,8 +1,8 @@
 <?php
 
-namespace music\report;
+namespace OranFry\Jars\TestPortal\Report;
 
-class imagemetas extends \jars\Report
+class imagemetas extends \OranFry\Jars\Core\Report
 {
     public function __construct()
     {
