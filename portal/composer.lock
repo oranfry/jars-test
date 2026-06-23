@@ -38,16 +38,16 @@
         },
         {
             "name": "oranfry/simple-fields",
-            "version": "3.3.1",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oranfry/simple-fields.git",
-                "reference": "c9b103d87cb61a9b13ab59c6425d402acbf3e7d7"
+                "reference": "7ae4d3c8ae85347938305cd5bd6867fba49037f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oranfry/simple-fields/zipball/c9b103d87cb61a9b13ab59c6425d402acbf3e7d7",
-                "reference": "c9b103d87cb61a9b13ab59c6425d402acbf3e7d7",
+                "url": "https://api.github.com/repos/oranfry/simple-fields/zipball/7ae4d3c8ae85347938305cd5bd6867fba49037f3",
+                "reference": "7ae4d3c8ae85347938305cd5bd6867fba49037f3",
                 "shasum": ""
             },
             "require": {
@@ -56,15 +56,15 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "simplefields\\": "classes"
+                    "OranFry\\SimpleFields\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "support": {
                 "issues": "https://github.com/oranfry/simple-fields/issues",
-                "source": "https://github.com/oranfry/simple-fields/tree/3.3.1"
+                "source": "https://github.com/oranfry/simple-fields/tree/4.0.0"
             },
-            "time": "2025-08-02T22:19:22+00:00"
+            "time": "2026-06-23T23:07:18+00:00"
         }
     ],
     "packages-dev": [],

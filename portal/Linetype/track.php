@@ -4,7 +4,7 @@ namespace OranFry\Jars\TestPortal\Linetype;
 
 class track extends \OranFry\Jars\Core\Linetype
 {
-    use \simplefields\traits\SimpleFields;
+    use \OranFry\SimpleFields\Traits\SimpleFields;
 
     function __construct()
     {

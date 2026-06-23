@@ -4,7 +4,7 @@ namespace OranFry\Jars\TestPortal\Linetype;
 
 class imagemeta extends \OranFry\HasImages\Linetype\imagemeta
 {
-    use \simplefields\traits\SimpleFields;
+    use \OranFry\SimpleFields\Traits\SimpleFields;
 
     function __construct()
     {
