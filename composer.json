@@ -1,6 +1,7 @@
 {
     "name": "oranfry/jars-test",
     "require": {
+        "oranfry/jars-contracts": "^10",
         "oranfry/jars-core": "*",
         "oranfry/obex": "*"
     }
