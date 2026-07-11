@@ -138,7 +138,7 @@ function strip_non_scalars(array $objectArray)
 
 function replay()
 {
-    $master = DB_HOME . '/master.dat';
+    $master = DB_HOME . '/master';
     $master_backup = '/tmp/music-master-' . getmypid();
 
     info('Replaying & Refreshing');
@@ -147,9 +147,8 @@ function replay()
         "mv '" . $master . "' '" . $master_backup . "'",
         "rm -rf '" . DB_HOME . "'",
         "mkdir -p '" . DB_HOME . "'",
-        "touch '" . $master . "'",
-        "cat '" . $master_backup . "' | '" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD . ' import',
-        "rm '" . $master_backup . "'",
+        "cat '" . $master_backup . "'/*/*/* | '" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD . ' import',
+        "rm -rf '" . $master_backup . "'",
     ];
 
     foreach ($cmds as $cmd) {
