@@ -1,6 +1,6 @@
 <?php
 
-use obex\Obex;
+use OranFry\Obex\Obex;
 
 $album_cover_external_ids = require TEST_HOME . '/asset/data/album-cover-external-ids-1.php';
 

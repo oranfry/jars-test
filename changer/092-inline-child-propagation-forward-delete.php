@@ -1,6 +1,6 @@
 <?php
 
-use obex\Obex;
+use OranFry\Obex\Obex;
 
 $jars = fresh_jars();
 $jars->login(USERNAME, PASSWORD, true);
