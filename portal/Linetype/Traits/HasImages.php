@@ -1,10 +1,10 @@
 <?php
 
-namespace OranFry\Jars\TestPortal\Linetype\Traight;
+namespace OranFry\Jars\TestPortal\Linetype\Traits;
 
-trait hasimages
+trait HasImages
 {
-    use \OranFry\HasImages\Linetype\Traight\hasimages;
+    use \OranFry\HasImages\Linetype\Traits\HasImages;
 
     protected function music_hasimages_init()
     {

@@ -2,7 +2,7 @@
 
 namespace OranFry\Jars\TestPortal\Linetype;
 
-class albumimageset extends imageset
+class AlbumImageSet extends ImageSet
 {
     function __construct()
     {

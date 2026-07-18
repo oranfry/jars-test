@@ -4,10 +4,10 @@ namespace OranFry\Jars\TestPortal\Linetype;
 
 use DateTime;
 
-class album extends \OranFry\Jars\Core\Linetype
+class Album extends \OranFry\Jars\Core\Linetype
 {
     use \OranFry\SimpleFields\Traits\SimpleFields;
-    use Traight\hasimages;
+    use Traits\HasImages;
 
     const IMAGE_SIZES = [
         'cover' => ['size' => [1200, 1200]],

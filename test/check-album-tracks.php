@@ -1,6 +1,5 @@
 <?php
 
-
 $jars = fresh_jars();
 $jars->login(USERNAME, PASSWORD, true);
 

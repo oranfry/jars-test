@@ -41,16 +41,16 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
     public function linetypes(): array
     {
         return [
-            'album' => Linetype\album::class,
-            'albumimageset' => Linetype\albumimageset::class,
-            'artist' => Linetype\artist::class,
-            'download' => Linetype\download::class,
-            'image' => \OranFry\HasImages\Linetype\image::class,
-            'imagemeta' => Linetype\imagemeta::class,
-            'imagemetaplain' => Linetype\imagemetaplain::class,
-            'imageplain' => \OranFry\HasImages\Linetype\imageplain::class,
-            'token' => \OranFry\Jars\Core\Linetype\token::class,
-            'track' => Linetype\track::class,
+            'album' => Linetype\Album::class,
+            'albumimageset' => Linetype\AlbumImageSet::class,
+            'artist' => Linetype\Artist::class,
+            'download' => Linetype\Download::class,
+            'image' => \OranFry\HasImages\Linetype\Image::class,
+            'imagemeta' => Linetype\ImageMeta::class,
+            'imagemetaplain' => Linetype\ImageMetaPlain::class,
+            'imageplain' => \OranFry\HasImages\Linetype\ImagePlain::class,
+            'token' => \OranFry\Jars\Core\Linetype\Token::class,
+            'track' => Linetype\Track::class,
         ];
     }
 
@@ -66,10 +66,10 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
     public function reports(): array
     {
         return [
-            'artists' => Report\artists::class,
-            'collection' => Report\collection::class,
-            'downloads' => Report\downloads::class,
-            'imagemetas' => Report\imagemetas::class,
+            'artists' => Report\Artists::class,
+            'collection' => Report\Collection::class,
+            'downloads' => Report\Downloads::class,
+            'imagemetas' => Report\ImageMetas::class,
         ];
     }
 

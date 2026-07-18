@@ -2,7 +2,7 @@
 
 namespace OranFry\Jars\TestPortal\Linetype;
 
-class imagemeta extends \OranFry\HasImages\Linetype\imagemeta
+class ImageMetaPlain extends \OranFry\HasImages\Linetype\imagemetaplain
 {
     use \OranFry\SimpleFields\Traits\SimpleFields;
 

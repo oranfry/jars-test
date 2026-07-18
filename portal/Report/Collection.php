@@ -2,7 +2,7 @@
 
 namespace OranFry\Jars\TestPortal\Report;
 
-class collection extends \OranFry\Jars\Core\Report
+class Collection extends \OranFry\Jars\Core\Report
 {
     public function __construct()
     {

@@ -2,10 +2,10 @@
 
 namespace OranFry\Jars\TestPortal\Report;
 
-class downloads extends \OranFry\Jars\Core\Report
+class ImageMetas extends \OranFry\Jars\Core\Report
 {
     public function __construct()
     {
-        $this->listen = ['download'];
+        $this->listen = ['imagemetaplain'];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace OranFry\Jars\TestPortal\Report;
 
-class artists extends \OranFry\Jars\Core\Report
+class Artists extends \OranFry\Jars\Core\Report
 {
     public function __construct()
     {

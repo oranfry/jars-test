@@ -2,7 +2,7 @@
 
 namespace OranFry\Jars\TestPortal\Linetype;
 
-class download extends \OranFry\Jars\Core\Linetype
+class Download extends \OranFry\Jars\Core\Linetype
 {
     use \OranFry\SimpleFields\Traits\SimpleFields;
 
