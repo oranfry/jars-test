@@ -283,7 +283,7 @@ function check_album_artists($expected)
         $expected_artist_id = @$ids['artist'][@$expected[$album->title]];
 
         if (!$expected_artist_id) {
-            throw new TestFailedException('Could not determine expected artist id for album [' . $album->title . ']');
+            throw new TestFailedException('Unexpected album [' . $album->title . ']');
         }
 
         if ($expected_artist_id != $album->artist_id) {
