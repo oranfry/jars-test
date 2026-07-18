@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "oranfry/hasimages",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oranfry/hasimages.git",
-                "reference": "3d09349261196a616f2860603912772e63e75755"
+                "reference": "fb516cdaef6b353b5d6f70cbe697f3fdeb132b76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/3d09349261196a616f2860603912772e63e75755",
-                "reference": "3d09349261196a616f2860603912772e63e75755",
+                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/fb516cdaef6b353b5d6f70cbe697f3fdeb132b76",
+                "reference": "fb516cdaef6b353b5d6f70cbe697f3fdeb132b76",
                 "shasum": ""
             },
             "require": {
@@ -32,9 +32,9 @@
             "notification-url": "https://packagist.org/downloads/",
             "support": {
                 "issues": "https://github.com/oranfry/hasimages/issues",
-                "source": "https://github.com/oranfry/hasimages/tree/3.0.1"
+                "source": "https://github.com/oranfry/hasimages/tree/3.0.2"
             },
-            "time": "2026-06-23T07:35:14+00:00"
+            "time": "2026-07-18T01:35:53+00:00"
         },
         {
             "name": "oranfry/simple-fields",
@@ -75,5 +75,5 @@
     "prefer-lowest": false,
     "platform": {},
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
