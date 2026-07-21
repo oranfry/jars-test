@@ -147,7 +147,17 @@ function replay()
         "mv '" . $master . "' '" . $master_backup . "'",
         "rm -rf '" . DB_HOME . "'",
         "mkdir -p '" . DB_HOME . "'",
-        "cat '" . $master_backup . "'/*/*/* | '" . BIN_HOME . "/jars' '--autoload=" . __DIR__ . "/portal/vendor/autoload.php' '--connection-string=" . CONNECTION_STRING . "' -u " . USERNAME . " -p " . PASSWORD . ' import',
+        implode(' ', [
+            'cat ',
+            "'" . $master_backup . "'/*/*/*",
+            '|',
+            "'" . BIN_HOME . "/jars'",
+            "'--autoload=" . __DIR__ . "/portal/vendor/autoload.php'",
+            "'--connection-string=" . JARS_CONNECTION_STRING . "'",
+            '-u ' . USERNAME,
+            '-p ' . PASSWORD,
+            'import',
+        ]),
         "rm -rf '" . $master_backup . "'",
     ];
 
@@ -169,7 +179,7 @@ function replay()
 
 function fresh_jars()
 {
-    return JarsConnector::connect(CONNECTION_STRING);
+    return JarsConnector::connect(JARS_CONNECTION_STRING);
 }
 
 function check_artist_reports($expected)

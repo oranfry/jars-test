@@ -8,7 +8,7 @@ if (!defined('BIN_HOME')) {
 
 const TEST_HOME = __DIR__;
 const DB_HOME = '/var/tmp/jars-test-db';
-const CONNECTION_STRING = 'local:OranFry\Jars\TestPortal\JarsConfig,' . DB_HOME;
+const JARS_CONNECTION_STRING = 'local:' . OranFry\Jars\TestPortal\JarsConfig::class . ',' . DB_HOME;
 const VERBOSE = true;
 const USERNAME = 'music';
 const PASSWORD = '123456';
