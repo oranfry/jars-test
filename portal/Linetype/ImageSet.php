@@ -2,7 +2,7 @@
 
 namespace OranFry\Jars\TestPortal\Linetype;
 
-class ImageSet extends \OranFry\HasImages\Linetype\ImageSet
+class ImageSet extends \OranFry\HasImages\Linetypes\ImageSet
 {
     function __construct()
     {

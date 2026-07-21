@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "oranfry/hasimages",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oranfry/hasimages.git",
-                "reference": "fb516cdaef6b353b5d6f70cbe697f3fdeb132b76"
+                "reference": "e9b8d87aa2e80d9edba69ee9804e356f235aae69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/fb516cdaef6b353b5d6f70cbe697f3fdeb132b76",
-                "reference": "fb516cdaef6b353b5d6f70cbe697f3fdeb132b76",
+                "url": "https://api.github.com/repos/oranfry/hasimages/zipball/e9b8d87aa2e80d9edba69ee9804e356f235aae69",
+                "reference": "e9b8d87aa2e80d9edba69ee9804e356f235aae69",
                 "shasum": ""
             },
             "require": {
@@ -26,15 +26,15 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "OranFry\\HasImages\\Linetype\\": ""
+                    "OranFry\\HasImages\\Linetypes\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "support": {
                 "issues": "https://github.com/oranfry/hasimages/issues",
-                "source": "https://github.com/oranfry/hasimages/tree/3.0.2"
+                "source": "https://github.com/oranfry/hasimages/tree/3.0.3"
             },
-            "time": "2026-07-18T01:35:53+00:00"
+            "time": "2026-07-21T03:39:46+00:00"
         },
         {
             "name": "oranfry/simple-fields",

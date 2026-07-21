@@ -45,10 +45,10 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
             'albumimageset' => Linetype\AlbumImageSet::class,
             'artist' => Linetype\Artist::class,
             'download' => Linetype\Download::class,
-            'image' => \OranFry\HasImages\Linetype\Image::class,
+            'image' => \OranFry\HasImages\Linetypes\Image::class,
             'imagemeta' => Linetype\ImageMeta::class,
             'imagemetaplain' => Linetype\ImageMetaPlain::class,
-            'imageplain' => \OranFry\HasImages\Linetype\ImagePlain::class,
+            'imageplain' => \OranFry\HasImages\Linetypes\ImagePlain::class,
             'token' => \OranFry\Jars\Core\Linetype\Token::class,
             'track' => Linetype\Track::class,
         ];
