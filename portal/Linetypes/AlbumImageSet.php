@@ -1,6 +1,6 @@
 <?php
 
-namespace OranFry\Jars\TestPortal\Linetype;
+namespace OranFry\Jars\TestPortal\Linetypes;
 
 class AlbumImageSet extends ImageSet
 {

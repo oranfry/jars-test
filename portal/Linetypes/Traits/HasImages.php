@@ -1,6 +1,6 @@
 <?php
 
-namespace OranFry\Jars\TestPortal\Linetype\Traits;
+namespace OranFry\Jars\TestPortal\Linetypes\Traits;
 
 trait HasImages
 {

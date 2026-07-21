@@ -1,6 +1,6 @@
 <?php
 
-namespace OranFry\Jars\TestPortal\Report;
+namespace OranFry\Jars\TestPortal\Reports;
 
 class Collection extends \OranFry\Jars\Core\Report
 {
