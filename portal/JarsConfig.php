@@ -49,7 +49,7 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
             'imagemeta' => Linetype\ImageMeta::class,
             'imagemetaplain' => Linetype\ImageMetaPlain::class,
             'imageplain' => \OranFry\HasImages\Linetypes\ImagePlain::class,
-            'token' => \OranFry\Jars\Core\Linetype\Token::class,
+            'token' => \OranFry\Jars\Core\Linetypes\Token::class,
             'track' => Linetype\Track::class,
         ];
     }
