@@ -94,16 +94,11 @@ function save_expect(array $data, ?callable $output_callback = null, ?callable $
     $output = $jars->save($data, $version ?? null);
     $version = $jars->version();
 
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
+    if ($output_callback) {
+        $output_callback($output, $data, $jars);
+    }
 
     unset($jars);
-
-    if ($output_callback) {
-        $output_callback($output, $data);
-    }
 }
 
 function preview_expect(array $data, ?callable $output_callback = null, ?callable $error_callback = null)
@@ -111,16 +106,13 @@ function preview_expect(array $data, ?callable $output_callback = null, ?callabl
     $jars = fresh_jars();
     $jars->login(USERNAME, PASSWORD, true);
 
+    $jars->group('artists');
+
     $output = $jars->preview($data);
 
     if ($output_callback) {
-        $output_callback($output, $data);
+        $output_callback($output, $data, $jars);
     }
-
-    $jars
-        ->filesystem()
-        ->persist()
-        ->reset();
 
     unset($jars);
 }
