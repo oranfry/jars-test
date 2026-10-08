@@ -28,14 +28,15 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
         return hash('sha256', $salt . $password) === $expected_hash;
     }
 
-    public function download_fields(): array
+    public function extra(): array
     {
-        return [];
-    }
-
-    public function float_dp(): array
-    {
-        return [];
+        return [
+            'reportMeta' => [
+                'artists' => ['fields' => ['name']],
+                'collection' => ['fields' => ['title', 'artist_name']],
+                'imagemetas' => ['fields' => ['title']],
+            ],
+        ];
     }
 
     public function linetypes(): array
@@ -54,15 +55,6 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
         ];
     }
 
-    public function report_fields(): array
-    {
-        return [
-            'artists' => ['name'],
-            'collection' => ['title', 'artist_name'],
-            'imagemetas' => ['title'],
-        ];
-    }
-
     public function reports(): array
     {
         return [
@@ -71,11 +63,6 @@ class JarsConfig implements \OranFry\Jars\Contract\Config
             'downloads' => Reports\Downloads::class,
             'imagemetas' => Reports\ImageMetas::class,
         ];
-    }
-
-    public function respect_newline_fields(): array
-    {
-        return [];
     }
 
     public function sequence(): Sequence
